@@ -59,7 +59,7 @@ export default function RequestPropertyAssistance() {
               </p>
 
               {callbackDone ? (
-                <div className="mt-8 inline-block rounded-2xl bg-emerald-500/20 border border-emerald-400/30 px-6 py-3 text-sm font-semibold text-emerald-300">
+                <div className="mt-8 inline-block rounded-2xl bg-emerald-500/20 border border-emerald-400/30 px-6 py-2.5 text-sm font-semibold text-emerald-300">
                   ✓ Callback request received! Our valuation manager will connect within 30 minutes.
                 </div>
               ) : (
@@ -70,11 +70,11 @@ export default function RequestPropertyAssistance() {
                     value={callbackPhone}
                     onChange={(e) => setCallbackPhone(e.target.value)}
                     required
-                    className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm text-white placeholder-white/50 outline-none backdrop-blur-md focus:border-[#a98440]"
+                    className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white placeholder-white/50 outline-none backdrop-blur-md focus:border-[#a98440]"
                   />
                   <button
                     type="submit"
-                    className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-7 py-3 text-sm font-bold text-white shadow-md transition active:scale-95 cursor-pointer"
+                    className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-7 py-2.5 text-sm font-bold text-white shadow-md transition active:scale-95 cursor-pointer"
                   >
                     Request Callback
                   </button>
@@ -94,25 +94,25 @@ export default function RequestPropertyAssistance() {
       </section>
 
       {/* 2. Structured Lead Assistance Form */}
-      <section className="bg-white py-24">
+      <section className="bg-white py-8 md:py-10">
         <div className="container-box">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] items-center">
-            <div className="overflow-hidden rounded-[32px] border border-slate-200 shadow-xl group">
+          <div className="grid gap-5 lg:grid-cols-[1fr_1.05fr] items-stretch max-w-3xl mx-auto">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-xl group">
               <img
                 src="/images/first.jpg"
                 alt="Personalized Property Shortlist"
-                className="h-[560px] w-full object-cover transition duration-700 group-hover:scale-105"
+                className="h-full min-h-[280px] w-full object-cover transition duration-700 group-hover:scale-105"
               />
             </div>
 
-            <div className="rounded-[32px] border border-slate-200 bg-white p-8 sm:p-12 shadow-xl">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-lg flex flex-col justify-center">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#a98440]">
                 Bespoke Advisory
               </span>
-              <h3 className="heading-display mt-3 text-3xl font-extrabold tracking-[-0.02em] text-slate-950 sm:text-4xl">
+              <h3 className="heading-display mt-1.5 text-xl font-extrabold tracking-[-0.02em] text-slate-950 sm:text-2xl">
                 Request Property Assistance
               </h3>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-1.5 text-xs text-slate-600">
                 Share your target parameters. Our Ahmedabad realty desk will filter verified on-market & off-market listings for you.
               </p>
 
@@ -133,82 +133,57 @@ export default function RequestPropertyAssistance() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-8 grid gap-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      Full Name *
+                <form onSubmit={handleSubmit} className="mt-4 grid gap-2.5">
+                  <label className="flex flex-col gap-1 text-[11px] font-bold text-slate-800">
+                    Your Name
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="your name"
+                      className="input-clean border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white"
+                    />
+                  </label>
+                  
+                  <label className="flex flex-col gap-1 text-[11px] font-bold text-slate-800">
+                    Mobile Number
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      placeholder="Mobile number"
+                      className="input-clean border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white"
+                    />
+                  </label>
+
+                  <label className="flex flex-col gap-1 text-[11px] font-bold text-slate-800">
+                    Email Address
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="example@gmail.com"
+                      className="input-clean border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white"
+                    />
+                  </label>
+
+                  <div className="grid gap-2.5 grid-cols-2">
+                    <label className="flex flex-col gap-1 text-[11px] font-bold text-slate-800">
+                      Max Price
                       <input
                         type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Your full name"
-                        className="input-clean"
+                        placeholder="$90,000"
+                        className="input-clean border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white"
                       />
                     </label>
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      WhatsApp Mobile Number *
-                      <input
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="10-digit number"
-                        className="input-clean"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      Email Address
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="nirav@example.com"
-                        className="input-clean"
-                      />
-                    </label>
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      Property Category
-                      <select
-                        value={formData.propertyType}
-                        onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="input-clean bg-white"
-                      >
-                        <option value="Apartment">Luxury Apartment (2-4 BHK)</option>
-                        <option value="Villa">Independent Bungalow / Villa</option>
-                        <option value="Commercial">Commercial Office / Showroom</option>
-                        <option value="Land">Residential Plot / Weekend Farmland</option>
-                        <option value="Gift City">GIFT City Pre-Leased SEZ</option>
-                      </select>
-                    </label>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      Budget Range
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="input-clean bg-white"
-                      >
-                        <option value="Under ₹ 75 L">Under ₹ 75 Lac</option>
-                        <option value="₹ 75 L - ₹ 1.5 Cr">₹ 75 Lac - ₹ 1.5 Cr</option>
-                        <option value="₹ 1.5 Cr - ₹ 3 Cr">₹ 1.5 Cr - ₹ 3 Cr</option>
-                        <option value="₹ 3 Cr - ₹ 6 Cr">₹ 3 Cr - ₹ 6 Cr</option>
-                        <option value="₹ 6 Cr+">₹ 6 Cr+ (Ultra Luxury)</option>
-                      </select>
-                    </label>
-                    <label className="flex flex-col gap-1.5 text-xs font-semibold text-slate-700">
-                      Preferred Locality
+                    <label className="flex flex-col gap-1 text-[11px] font-bold text-slate-800">
+                      Min Size
                       <input
                         type="text"
-                        value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        placeholder="e.g. Shela, Ambli, Sindhubhavan, Bodakdev"
-                        className="input-clean"
+                        placeholder="2,000 sq ft"
+                        className="input-clean border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white"
                       />
                     </label>
                   </div>
@@ -216,9 +191,9 @@ export default function RequestPropertyAssistance() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-4 h-13 rounded-xl bg-[#a98440] hover:bg-[#977232] px-8 text-sm font-bold text-white shadow-md transition active:scale-95 disabled:opacity-50 cursor-pointer"
+                    className="mt-1 w-full rounded-lg bg-[#a98440] hover:bg-[#977232] px-6 py-2 text-[12px] font-bold text-white shadow-md transition active:scale-95 disabled:opacity-50 cursor-pointer"
                   >
-                    {isSubmitting ? "Matching Properties..." : "Get Tailored Property Shortlist"}
+                    {isSubmitting ? "Submitting..." : "Submit Request"}
                   </button>
                 </form>
               )}

@@ -63,7 +63,7 @@ export default function PostPropertyForm() {
         bathrooms: "",
         description: "",
       });
-    } catch (error) {
+    } catch {
       setStatus("Something went wrong. Please try again.");
     }
   }

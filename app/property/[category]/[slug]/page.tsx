@@ -44,7 +44,7 @@ export default async function PropertyDetailPage({
       <Navbar />
 
       {/* Hero Header Banner */}
-      <section className="bg-slate-900 pb-12 pt-32 text-white">
+      <section className="bg-slate-900 pb-12 pt-24 md:pt-28 text-white">
         <div className="container-box">
           <div className="flex flex-wrap items-center gap-2 text-xs text-white/60 mb-3">
             <span>Home</span>
@@ -200,22 +200,22 @@ export default async function PropertyDetailPage({
             </div>
           </div>
         </div>
-
+        
         {/* Sidebar Lead Form */}
-        <aside id="lead-form" className="lg:sticky lg:top-24 lg:h-fit">
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
-            <div className="bg-gradient-to-r from-[#a98440] to-[#b8934d] p-5 text-white">
+        <aside id="lead-form" className="lg:sticky lg:top-20 lg:h-fit">
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+            <div className="bg-gradient-to-r from-[#a98440] to-[#b8934d] p-4 text-white">
               <span className="text-[10px] font-bold uppercase tracking-wider text-white/90">
                 Direct Developer Coordination
               </span>
-              <h4 className="heading-display mt-1 text-lg font-bold text-white">
+              <h4 className="heading-display text-base font-bold text-white">
                 Book a VIP Site Walkthrough
               </h4>
-              <p className="mt-1 text-xs text-white/90">
+              <p className="text-[11px] leading-tight text-white/90">
                 Get confirmed pricing matrix, floor plans, and RERA approval dossiers.
               </p>
             </div>
-            <div className="p-5">
+            <div className="p-3">
               <LeadForm
                 propertyCategory={category.replace("-", "_")}
                 propertyId={property.id}

@@ -9,30 +9,51 @@ const DEAL_MODES = [
   { value: "invest", label: "Invest" },
 ];
 
-const CATEGORY_TABS = [
-  { value: "residential", label: "Residential" },
-  { value: "new-launch", label: "New Launch" },
-  { value: "commercial", label: "Commercial" },
-  { value: "plots", label: "Plots/Land" },
-];
+const CATEGORY_TABS_BY_MODE = {
+  buy: [
+    { value: "residential", label: "Residential" },
+    { value: "new-launch", label: "New Launch" },
+    { value: "commercial", label: "Commercial" },
+    { value: "plots", label: "Plots/Land" },
+  ],
+  rent: [
+    { value: "residential", label: "Residential" },
+    { value: "commercial", label: "Commercial" },
+    { value: "villa", label: "Luxury Villas" },
+    { value: "furnished", label: "Furnished" },
+  ],
+  invest: [
+    { value: "preleased", label: "Pre-Leased Commercial" },
+    { value: "gift-city", label: "GIFT City IFSC" },
+    { value: "retail", label: "High-ROI Retail" },
+    { value: "land", label: "Growth Corridors" },
+  ],
+};
 
-const PROPERTY_TYPE_OPTIONS = [
-  { value: "", label: "All Residential" },
-  { value: "flat", label: "Apartment / Flat" },
-  { value: "villa", label: "Luxury Villa" },
-  { value: "bungalow", label: "Bungalow" },
-  { value: "penthouse", label: "Penthouse" },
-];
+const PROPERTY_TYPE_BY_MODE = {
+  buy: [
+    { value: "", label: "All Residential" },
+    { value: "flat", label: "Apartment / Flat" },
+    { value: "villa", label: "Luxury Villa" },
+    { value: "bungalow", label: "Bungalow" },
+    { value: "penthouse", label: "Penthouse" },
+  ],
+  rent: [
+    { value: "", label: "All Rentals" },
+    { value: "flat", label: "Apartment / Flat" },
+    { value: "villa", label: "Villa / Bungalow" },
+    { value: "office", label: "Commercial Office" },
+    { value: "penthouse", label: "Penthouse" },
+  ],
+  invest: [
+    { value: "", label: "All Assets" },
+    { value: "preleased", label: "Pre-Leased Office" },
+    { value: "retail", label: "Retail Showroom" },
+    { value: "gift", label: "GIFT City Tower" },
+    { value: "plot", label: "Commercial Plot" },
+  ],
+};
 
-const POPULAR_LOCALITIES = [
-  "Iscon Ambli",
-  "Shela",
-  "Sindhubhavan",
-  "GIFT City",
-  "Bodakdev",
-  "Science City",
-  "Thaltej",
-];
 
 const DYNAMIC_WORDS = [
   "High-Potential",
@@ -87,15 +108,20 @@ function resolveDestination({ dealMode, categoryTab, propertyType, search }) {
 
   if (dealMode === "rent") {
     path = "/rent";
+    if (categoryTab === "commercial") path = "/commercial";
+    else if (categoryTab === "villa") path = "/plot-weekend-villa";
+    if (propertyType) params.set("property_type", propertyType);
   } else if (dealMode === "invest") {
     path = "/investment";
-  } else if (categoryTab === "commercial") {
-    path = "/commercial";
-  } else if (categoryTab === "plots") {
-    path = "/plot-weekend-villa";
+    if (categoryTab === "gift-city") path = "/gift-city";
+    else if (categoryTab === "land") path = "/plot-weekend-villa";
+    else if (categoryTab === "retail") path = "/commercial";
+    if (propertyType) params.set("property_type", propertyType);
   } else {
     path = "/residential";
-    if (categoryTab === "new-launch") params.set("is_featured", "true");
+    if (categoryTab === "commercial") path = "/commercial";
+    else if (categoryTab === "plots") path = "/plot-weekend-villa";
+    else if (categoryTab === "new-launch") params.set("is_featured", "true");
     if (propertyType) params.set("property_type", propertyType);
   }
 
@@ -150,10 +176,8 @@ export default function HeroSearch() {
     router.push(resolveDestination({ dealMode, categoryTab, propertyType, search: s }));
   }
 
-  const showCategoryTabs = dealMode === "buy";
-
   return (
-    <section className="relative overflow-hidden bg-slate-950 pb-24 pt-32 md:pt-40">
+    <section className="relative overflow-hidden bg-slate-950 pb-16 pt-20 md:pt-24 min-h-[580px] sm:min-h-[620px] flex flex-col justify-center">
       {/* 1. Ultra-Luxury Architectural Background with Smooth Slide Transitions */}
       <div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -188,38 +212,7 @@ export default function HeroSearch() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.12),transparent_70%)]" />
       </div>
 
-      {/* 2. Top-Level Slide Navigation Controls (Left & Right Arrows) - z-30 Layer */}
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 z-30 flex -translate-y-1/2 items-center justify-between px-3 sm:px-8">
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            prevSlide();
-          }}
-          aria-label="Previous Slide"
-          className="pointer-events-auto flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-white/50 bg-slate-950/75 text-white shadow-2xl backdrop-blur-lg transition-all hover:scale-115 hover:bg-[#a98440] hover:border-white active:scale-90 cursor-pointer"
-        >
-          <svg className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            nextSlide();
-          }}
-          aria-label="Next Slide"
-          className="pointer-events-auto flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-white/50 bg-slate-950/75 text-white shadow-2xl backdrop-blur-lg transition-all hover:scale-115 hover:bg-[#a98440] hover:border-white active:scale-90 cursor-pointer"
-        >
-          <svg className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
 
       {/* 3. Bottom Slide Info Badge - z-30 Layer */}
       <div className="pointer-events-none absolute bottom-5 left-6 z-30 hidden sm:flex items-center gap-2 rounded-full border border-white/30 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs text-white shadow-xl">
@@ -234,7 +227,7 @@ export default function HeroSearch() {
       <div className="relative z-20">
         <div className="container-box text-center">
           {/* Main Animated Headline */}
-          <h1 className="hero-title mx-auto max-w-[1000px] text-[36px] leading-[1.08] text-white sm:text-[54px] md:text-[68px] lg:text-[80px] drop-shadow-lg">
+          <h1 className="hero-title mx-auto max-w-[900px] text-[28px] leading-[1.1] text-white sm:text-[40px] md:text-[50px] lg:text-[58px] drop-shadow-lg">
             Find{" "}
             <span
               className={`animate-shimmer inline-block bg-gradient-to-r from-[#e6c278] via-[#fce6a8] to-[#a98440] bg-clip-text text-transparent transition-all duration-300 ${
@@ -247,12 +240,12 @@ export default function HeroSearch() {
             Real Estate Opportunities
           </h1>
 
-          <p className="mt-4 mx-auto max-w-[740px] text-sm leading-relaxed text-white/85 sm:text-base md:text-lg drop-shadow">
+          <p className="mt-2.5 sm:mt-3 mx-auto max-w-[680px] text-xs leading-relaxed text-white/85 sm:text-sm md:text-base drop-shadow">
             Explore curated luxury residences, flagship corporate offices, and emerging high-growth corridors with complete transparency.
           </p>
 
           {/* Search Box Container with Ambient Pulse Glow */}
-          <div className="relative mt-10 mx-auto w-full max-w-[1020px] text-left">
+          <div className="relative mt-5 sm:mt-6 mx-auto w-full max-w-[980px] text-left">
             {/* Ambient Background Aura */}
             <div className="animate-pulse-ambient absolute -inset-3 -z-10 rounded-[36px] bg-gradient-to-r from-[#a98440]/25 via-[#fbbf24]/20 to-[#a98440]/25 blur-2xl" />
 
@@ -262,11 +255,16 @@ export default function HeroSearch() {
                 <button
                   key={mode.value}
                   type="button"
-                  onClick={() => setDealMode(mode.value)}
-                  className={`rounded-t-xl px-7 py-3 text-sm font-bold transition-all duration-150 cursor-pointer ${
+                  onClick={() => {
+                    setDealMode(mode.value);
+                    const defaultTab = CATEGORY_TABS_BY_MODE[mode.value]?.[0]?.value || "residential";
+                    setCategoryTab(defaultTab);
+                    setPropertyType("");
+                  }}
+                  className={`rounded-t-xl px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-bold transition-all duration-150 cursor-pointer ${
                     dealMode === mode.value
                       ? "bg-[#a98440] text-white shadow-sm"
-                      : "bg-white text-slate-900 hover:bg-slate-50"
+                      : "glass-search-tab text-slate-900 hover:bg-white/95"
                   }`}
                 >
                   {mode.label}
@@ -274,41 +272,39 @@ export default function HeroSearch() {
               ))}
             </div>
 
-            {/* Unified White Search Card (Exact Figma match from Image 3) */}
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white p-4 sm:p-6 shadow-[0_30px_90px_rgba(2,6,23,0.35)] border border-white">
-              {/* Category subtabs row */}
-              {showCategoryTabs && (
-                <div className="mb-4 flex items-center gap-7 sm:gap-9 border-b border-slate-100 pb-3 text-sm font-semibold overflow-x-auto scrollbar-hide">
-                  {CATEGORY_TABS.map((tabItem) => (
-                    <button
-                      key={tabItem.value}
-                      type="button"
-                      onClick={() => setCategoryTab(tabItem.value)}
-                      className={`relative pb-2 transition cursor-pointer shrink-0 ${
-                        categoryTab === tabItem.value
-                          ? "border-b-2 border-[#a98440] text-slate-900 font-bold"
-                          : "text-slate-600 hover:text-slate-900 font-medium"
-                      }`}
-                    >
-                      {tabItem.label}
-                      {tabItem.value === "new-launch" && (
-                        <span className="inline-block h-2 w-2 rounded-full bg-red-600 ml-1 mb-2.5 align-middle" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
+            {/* Unified Glassmorphic Search Card with Backdrop Blur */}
+            <div className="glass-search-card relative overflow-hidden rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-[0_24px_70px_rgba(2,6,23,0.35)]">
+              {/* Category subtabs row - Always rendered so the card height remains 100% constant across Buy / Rent / Invest */}
+              <div className="mb-3 flex items-center gap-6 sm:gap-8 border-b border-slate-100 pb-2.5 text-xs sm:text-sm font-semibold overflow-x-auto scrollbar-hide">
+                {(CATEGORY_TABS_BY_MODE[dealMode] || CATEGORY_TABS_BY_MODE.buy).map((tabItem) => (
+                  <button
+                    key={tabItem.value}
+                    type="button"
+                    onClick={() => setCategoryTab(tabItem.value)}
+                    className={`relative pb-2 transition cursor-pointer shrink-0 ${
+                      categoryTab === tabItem.value
+                        ? "border-b-2 border-[#a98440] text-slate-900 font-bold"
+                        : "text-slate-600 hover:text-slate-900 font-medium"
+                    }`}
+                  >
+                    {tabItem.label}
+                    {tabItem.value === "new-launch" && (
+                      <span className="inline-block h-2 w-2 rounded-full bg-red-600 ml-1 mb-2.5 align-middle" />
+                    )}
+                  </button>
+                ))}
+              </div>
 
               {/* Main Search Input Line (Matches Image 3) */}
-              <div className="flex flex-col gap-3 md:flex-row md:items-center">
-                {/* Left Dropdown: All Residential ⌵ */}
+              <div className="flex flex-col gap-2.5 md:flex-row md:items-center">
+                {/* Left Dropdown: Dynamic options per deal mode */}
                 <div className="flex items-center gap-1 shrink-0">
                   <select
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
-                    className="bg-transparent py-2.5 pl-2 pr-4 text-sm font-semibold text-slate-800 outline-none cursor-pointer"
+                    className="bg-transparent py-2 pl-2 pr-4 text-xs sm:text-sm font-semibold text-slate-800 outline-none cursor-pointer"
                   >
-                    {PROPERTY_TYPE_OPTIONS.map((opt) => (
+                    {(PROPERTY_TYPE_BY_MODE[dealMode] || PROPERTY_TYPE_BY_MODE.buy).map((opt) => (
                       <option key={opt.value} value={opt.value}>
                         {opt.label}
                       </option>
@@ -317,7 +313,7 @@ export default function HeroSearch() {
                 </div>
 
                 {/* Divider Line */}
-                <div className="hidden md:block h-8 w-[1px] bg-slate-200 shrink-0" />
+                <div className="hidden md:block h-7 w-[1px] bg-slate-200 shrink-0" />
 
                 {/* Main Search Input */}
                 <div className="relative flex-1">
@@ -325,7 +321,7 @@ export default function HeroSearch() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                    className="w-full bg-transparent px-3 py-2.5 text-sm text-slate-800 placeholder-slate-400 outline-none"
+                    className="w-full bg-transparent px-3 py-2 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none"
                     placeholder="Search city, locality, project, builder, or landmark"
                   />
                   {search && (
@@ -339,15 +335,15 @@ export default function HeroSearch() {
                 </div>
 
                 {/* Action Icons & Primary Golden Search Button */}
-                <div className="flex items-center gap-2.5 justify-end">
+                <div className="flex items-center gap-2 justify-end">
                   {/* Mic Voice Search */}
                   <button
                     type="button"
                     onClick={() => handleSearch()}
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-[#0284c7] hover:bg-blue-100 transition cursor-pointer shadow-xs"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-[#0284c7] hover:bg-blue-100 transition cursor-pointer shadow-xs"
                     title="Voice Search"
                   >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
                     </svg>
                   </button>
@@ -359,10 +355,10 @@ export default function HeroSearch() {
                       setSearch("Ahmedabad");
                       handleSearch("Ahmedabad");
                     }}
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-[#0284c7] hover:bg-blue-100 transition cursor-pointer shadow-xs"
+                    className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-blue-50/90 text-[#0284c7] hover:bg-blue-100 transition cursor-pointer shadow-xs"
                     title="Near Me"
                   >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                       <circle cx="12" cy="12" r="7"/>
                       <line x1="12" y1="2" x2="12" y2="5"/>
                       <line x1="12" y1="19" x2="12" y2="22"/>
@@ -375,30 +371,11 @@ export default function HeroSearch() {
                   <button
                     type="button"
                     onClick={() => handleSearch()}
-                    className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-7 py-3 text-sm font-semibold text-white shadow-sm transition active:scale-95 cursor-pointer whitespace-nowrap"
+                    className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-sm transition active:scale-95 cursor-pointer whitespace-nowrap"
                   >
                     Search Properties
                   </button>
                 </div>
-              </div>
-
-              {/* Popular Localities Quick Chips */}
-              <div className="mt-5 flex flex-wrap items-center gap-2 pt-3.5 border-t border-slate-100 text-xs">
-                <span className="font-bold text-slate-400 flex items-center gap-1">
-                  <span>⚡</span> Popular Localities:
-                </span>
-                {POPULAR_LOCALITIES.map((loc) => (
-                  <button
-                    key={loc}
-                    onClick={() => {
-                      setSearch(loc);
-                      handleSearch(loc);
-                    }}
-                    className="rounded-xl border border-slate-200/80 bg-slate-50 px-3 py-1.5 font-semibold text-slate-700 transition hover:border-[#a98440] hover:bg-[#a98440]/10 hover:text-[#a98440] hover:scale-105 active:scale-95 cursor-pointer"
-                  >
-                    {loc}
-                  </button>
-                ))}
               </div>
             </div>
           </div>

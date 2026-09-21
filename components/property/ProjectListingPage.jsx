@@ -7,6 +7,7 @@ import ProjectCard from "./ProjectCard";
 import BookSiteVisitForm from "./BookSiteVisitForm";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import FilterDropdown from "@/components/ui/FilterDropdown";
 
 /*
   Listing page matching screenshot 2:
@@ -75,7 +76,6 @@ const FILTER_CONFIG = {
 };
 
 const BUDGET_OPTIONS = [
-  { value: "", label: "Budget" },
   { value: "under-50l", label: "Under ₹50 Lac" },
   { value: "50l-1cr", label: "₹50 Lac - ₹1 Cr" },
   { value: "above-1cr", label: "Above ₹1 Cr" },
@@ -94,11 +94,24 @@ function budgetToRange(value) {
   }
 }
 
+const POSSESSION_OPTIONS = [
+  { value: "ready", label: "Ready to Move" },
+  { value: "2025", label: "In 2025" },
+  { value: "2026", label: "In 2026" },
+  { value: "2027", label: "In 2027+" },
+];
+
 const SORT_OPTIONS = [
-  { value: "", label: "Sort by: Relevance" },
   { value: "price", label: "Price: Low to High" },
   { value: "-price", label: "Price: High to Low" },
   { value: "-created_at", label: "Newest First" },
+];
+
+const BHK_OPTIONS = [
+  { value: "1", label: "1 BHK" },
+  { value: "2", label: "2 BHK" },
+  { value: "3", label: "3 BHK" },
+  { value: "4", label: "4+ BHK" },
 ];
 
 /**
@@ -109,7 +122,7 @@ const SORT_OPTIONS = [
  *   defaultQuery?: string,
  *   sidebarForm?: import("react").ReactNode,
  * }} props
- */
+ * */
 export default function ProjectListingPage(props) {
   // useSearchParams() requires a Suspense boundary during static generation —
   // isolated here so every page using this component gets it for free.
@@ -123,9 +136,9 @@ export default function ProjectListingPage(props) {
 function ListingPageFallback({ title }) {
   return (
     <main className="min-h-screen bg-[#f7f9fc]">
-      <section className="bg-soft-blue pb-8 pt-24">
+      <section className="bg-soft-blue pb-6 pt-20 sm:pt-22">
         <Navbar />
-        <div className="container-box pt-12">
+        <div className="container-box pt-2 sm:pt-3">
           <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{title}</h1>
           <div className="mt-8 rounded-2xl bg-white p-8 text-center text-slate-500">
             Loading...
@@ -162,6 +175,8 @@ function ProjectListingPageInner({
   const [showAdvisorPhone, setShowAdvisorPhone] = useState(false);
 
   const [search, setSearch] = useState(urlParams.get("search") ?? "");
+  const [localityFilter, setLocalityFilter] = useState("Sindhubhavan Road");
+  const [possession, setPossession] = useState("");
   const [city, setCity] = useState(urlParams.get("city") ?? "");
   const [bhk, setBhk] = useState(urlParams.get("bedrooms") ?? "");
   const [budget, setBudget] = useState("");
@@ -178,7 +193,6 @@ function ProjectListingPageInner({
       if (!OWNED_KEYS.includes(key)) extras[key] = value;
     }
     return extras;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
 
   function buildQueryString() {
@@ -187,9 +201,12 @@ function ProjectListingPageInner({
     Object.entries(extraParams).forEach(([key, value]) => params.set(key, value));
 
     if (search) params.set("search", search);
+    else if (localityFilter) params.set("search", localityFilter);
+
     if (city) params.set("city", city);
     if (bhk) params.set("bedrooms", bhk);
     if (propertyType) params.set(config.typeField, propertyType);
+    if (possession) params.set("possession", possession);
 
     const range = budgetToRange(budget);
     const gte = range.gte ?? priceRangeFromUrl.gte;
@@ -232,6 +249,7 @@ function ProjectListingPageInner({
     router.replace(`${pathname}${qs}`, { scroll: false });
 
     async function executeLoad() {
+      setLoading(true);
       try {
         const data = await fetchProperties(`${endpoint}${qs}`);
         if (isMounted) {
@@ -263,130 +281,169 @@ function ProjectListingPageInner({
 
   return (
     <main className="min-h-screen bg-[#f7f9fc]">
-      <section className="bg-soft-blue pb-8 pt-24">
+      <section className="bg-gradient-to-b from-[#dce7f3] via-[#edf3f8] to-[#f8fafc] pb-2 pt-20 sm:pt-22">
         <Navbar />
 
-        <div className="container-box pt-12">
-          <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
-            {title}{" "}
-            <span className="text-base font-medium text-slate-500">
-              ({count} Projects)
-            </span>
-          </h1>
+        <div className="w-[96%] max-w-[1340px] mx-auto pt-2 sm:pt-3">
+          {/* Header Row matching Image 1 */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-xl font-normal text-slate-700 md:text-2xl flex items-baseline gap-2 flex-wrap">
+              <span>{localityFilter ? `${localityFilter}, Ahmedabad` : title}</span>
+              <span className="text-sm font-normal text-slate-500">
+                ({count} Projects)
+              </span>
+            </h1>
 
-          {/* New Projects / Owner Properties toggle */}
-          <div className="mt-6 flex w-fit rounded-full bg-white p-1 shadow-sm">
-            <button
-              onClick={() => setTab("new")}
-              className={
-                tab === "new"
-                  ? "rounded-full bg-[#a98440] px-5 py-2 text-sm font-semibold text-white shadow-xs"
-                  : "rounded-full px-5 py-2 text-sm font-medium text-slate-600"
-              }
-            >
-              New Projects
-            </button>
-            <button
-              onClick={() => setTab("owner")}
-              className={
-                tab === "owner"
-                  ? "rounded-full bg-[#a98440] px-5 py-2 text-sm font-semibold text-white shadow-xs"
-                  : "rounded-full px-5 py-2 text-sm font-medium text-slate-600"
-              }
-            >
-              Owner Properties
-            </button>
+            {/* New Projects / Owner Properties toggle matching Image 1 top right */}
+            <div className="flex w-fit items-center rounded-full bg-white p-1 shadow-xs border border-slate-200/80">
+              <button
+                type="button"
+                onClick={() => setTab("new")}
+                className={
+                  tab === "new"
+                    ? "rounded-full bg-[#a98440] px-5 py-1.5 text-xs sm:text-sm font-medium text-white shadow-xs transition-colors cursor-pointer"
+                    : "rounded-full px-5 py-1.5 text-xs sm:text-sm font-normal text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                }
+              >
+                New Projects
+              </button>
+              <button
+                type="button"
+                onClick={() => setTab("owner")}
+                className={
+                  tab === "owner"
+                    ? "rounded-full bg-[#a98440] px-5 py-1.5 text-xs sm:text-sm font-medium text-white shadow-xs transition-colors cursor-pointer"
+                    : "rounded-full px-5 py-1.5 text-xs sm:text-sm font-normal text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                }
+              >
+                Owner Properties
+              </button>
+            </div>
           </div>
 
-          {/* Filter bar */}
+          {/* Filter pills matching Image 1 - single horizontal row with preserved Search button */}
           <form
             onSubmit={handleSearch}
-            className="mt-4 flex flex-wrap items-center gap-2 rounded-2xl bg-white p-3 shadow-sm"
+            className="mt-3 flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide py-1 w-full flex-nowrap pr-4 sm:pr-6"
           >
-            <select
-              value={city}
-              onChange={(event) => setCity(event.target.value)}
-              className="input-clean w-auto min-w-[130px] flex-1"
-            >
-              <option value="">All Cities</option>
-              <option value="Ahmedabad">Ahmedabad</option>
-              <option value="Gandhinagar">GIFT City</option>
-              <option value="Dholera">Dholera</option>
-            </select>
+            {/* Combined City + Search Location Capsule */}
+            <div className="flex h-9 shrink-0 items-center rounded-full border border-slate-200/90 bg-white px-3 shadow-xs hover:border-slate-300 transition-colors">
+              <div className="relative flex items-center">
+                <select
+                  value={city}
+                  onChange={(event) => setCity(event.target.value)}
+                  className="appearance-none bg-transparent pr-4 text-xs font-normal text-slate-700 outline-none cursor-pointer"
+                >
+                  <option value="">Ahmedabad</option>
+                  <option value="Ahmedabad">Ahmedabad</option>
+                  <option value="Gandhinagar">Gandhinagar</option>
+                  <option value="GIFT City">GIFT City</option>
+                </select>
+                <svg
+                  className="pointer-events-none absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
 
-            <input
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              className="input-clean min-w-[180px] flex-[2]"
-              placeholder="Search Location, Builder..."
-            />
+              <div className="mx-2 h-3.5 w-[1px] bg-slate-200/80 shrink-0" />
 
-            {config.showBhk && (
-              <select
-                value={bhk}
-                onChange={(event) => setBhk(event.target.value)}
-                className="input-clean w-auto min-w-[90px]"
-              >
-                <option value="">BHK</option>
-                <option value="1">1 BHK</option>
-                <option value="2">2 BHK</option>
-                <option value="3">3 BHK</option>
-                <option value="4">4+ BHK</option>
-              </select>
+              <input
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                className="w-28 sm:w-32 md:w-36 bg-transparent text-xs text-slate-700 placeholder-slate-400 outline-none"
+                placeholder="Search Location, Builder..."
+              />
+            </div>
+
+            {/* Locality Pill Chip */}
+            {localityFilter && (
+              <div className="flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3 shadow-xs text-xs font-normal text-slate-700">
+                <span>{localityFilter}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocalityFilter("");
+                    setTimeout(() => loadProperties(), 50);
+                  }}
+                  className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer ml-1 flex items-center"
+                  title="Remove locality filter"
+                >
+                  <svg className="h-3.5 w-3.5 text-slate-500 hover:text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                </button>
+              </div>
             )}
 
-            <select
-              value={budget}
-              onChange={(event) => setBudget(event.target.value)}
-              className="input-clean w-auto min-w-[100px]"
-            >
-              {BUDGET_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            {/* BHK Dropdown Pill */}
+            {config.showBhk && (
+              <FilterDropdown 
+                value={bhk} 
+                onChange={setBhk} 
+                options={BHK_OPTIONS} 
+                defaultLabel="BHK" 
+              />
+            )}
 
-            <select
-              value={propertyType}
-              onChange={(event) => setPropertyType(event.target.value)}
-              className="input-clean w-auto min-w-[130px]"
-            >
-              <option value="">Property Type</option>
-              {config.typeOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            {/* Budget Dropdown Pill */}
+            <FilterDropdown 
+              value={budget} 
+              onChange={setBudget} 
+              options={BUDGET_OPTIONS} 
+              defaultLabel="Budget" 
+            />
 
-            <button className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-6 py-3 text-sm font-bold text-white shadow-xs transition active:scale-95 cursor-pointer">
+            {/* Possession Dropdown Pill */}
+            <FilterDropdown 
+              value={possession} 
+              onChange={setPossession} 
+              options={POSSESSION_OPTIONS} 
+              defaultLabel="Possession" 
+            />
+
+            {/* Property Type Dropdown Pill */}
+            <FilterDropdown 
+              value={propertyType} 
+              onChange={setPropertyType} 
+              options={config.typeOptions} 
+              defaultLabel="Property Type" 
+            />
+
+            {/* Sort By Dropdown Pill */}
+            <FilterDropdown 
+              value={sortBy} 
+              onChange={setSortBy} 
+              options={SORT_OPTIONS} 
+              defaultLabel="Sort By : Relevance" 
+            />
+
+            {/* Preserved Search Button as matching pill */}
+            <button
+              type="submit"
+              className="h-9 shrink-0 rounded-full bg-[#a98440] hover:bg-[#977232] px-4 text-xs font-semibold text-white shadow-xs transition-colors active:scale-95 cursor-pointer flex items-center justify-center"
+            >
               Search
             </button>
           </form>
         </div>
       </section>
 
-      <section className="container-box grid gap-6 py-8 lg:grid-cols-[1fr_320px]">
+      {/* Listing Results Count Bar */}
+      <div className="w-[96%] max-w-[1340px] mx-auto pt-2 pb-2">
+        <p className="text-xs sm:text-sm font-medium text-slate-500">
+          Showing {count} {tab === "new" ? "new projects" : "owner properties"}
+        </p>
+      </div>
+
+      <section className="w-[96%] max-w-[1340px] mx-auto grid gap-6 pb-12 lg:grid-cols-[1fr_320px]">
         {/* Listings */}
         <div className="space-y-5">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-slate-500">
-              Showing {count} {tab === "new" ? "new projects" : "owner properties"}
-            </p>
-            <select
-              value={sortBy}
-              onChange={(event) => setSortBy(event.target.value)}
-              className="input-clean w-auto text-sm"
-            >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {loading && (
             <div className="rounded-2xl bg-white p-8 text-center text-slate-500">
               Loading properties...
@@ -410,7 +467,7 @@ function ProjectListingPageInner({
         </div>
 
         {/* Sidebar */}
-        <aside className="space-y-5 lg:sticky lg:top-6 lg:h-fit">
+        <aside className="space-y-3 lg:sticky lg:top-20 lg:h-fit">
           {sidebarForm ?? <BookSiteVisitForm category={category} />}
 
           {/* Advisor */}
@@ -428,17 +485,17 @@ function ProjectListingPageInner({
               {showAdvisorPhone ? (
                 <a
                   href="tel:+919574491891"
-                  className="ml-auto rounded-lg bg-green-500 px-3 py-2 text-[12px] font-semibold text-white"
+                  className="ml-auto rounded-lg bg-[#b18537] hover:bg-[#977232] px-3.5 py-2 text-[12px] font-bold text-white shadow-xs transition"
                 >
-                  📞 +91 95744 91891
+                  +91 95744 91891
                 </a>
               ) : (
                 <button
                   type="button"
                   onClick={() => setShowAdvisorPhone(true)}
-                  className="ml-auto rounded-lg bg-green-500 px-3 py-2 text-[12px] font-semibold text-white"
+                  className="ml-auto rounded-lg bg-[#b18537] hover:bg-[#977232] px-4 py-2 text-[12px] font-bold text-white shadow-xs transition cursor-pointer"
                 >
-                  📞 Call
+                  Call
                 </button>
               )}
             </div>
@@ -447,13 +504,16 @@ function ProjectListingPageInner({
           {/* Need Expert Advice */}
           <div className="rounded-2xl bg-[#fbf7ee] p-5 ring-1 ring-[#e2d1b3]/60">
             <p className="text-sm font-bold text-slate-900">
-              Need Expert Advice?
+              Need Expert Advice ?
             </p>
             <p className="mt-1 text-[12px] text-slate-500">
               Our property advisors will help you find the best investment.
             </p>
-            <button className="mt-3 w-full rounded-xl bg-[#111827] py-2.5 text-[13px] font-semibold text-white hover:bg-slate-800 transition active:scale-95 cursor-pointer">
-              💬 Talk to an Advisor
+            <button
+              type="button"
+              className="mt-3 w-full rounded-xl bg-[#b18537] hover:bg-[#977232] py-2.5 text-[13px] font-bold text-white shadow-xs transition active:scale-95 cursor-pointer text-center"
+            >
+              Talk to advisor
             </button>
           </div>
         </aside>

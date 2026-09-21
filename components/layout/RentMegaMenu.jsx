@@ -1,6 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import {
+  Home,
+  BarChart3,
+  Armchair,
+  Coins,
+  MapPin,
+  ArrowRight,
+  Tag,
+  FileCheck,
+  Users,
+  Lock,
+  PhoneCall,
+} from "lucide-react";
 
 /*
   Rent mega-menu — same shape as BuyMegaMenu but themed around renting:
@@ -55,18 +68,19 @@ export const RENT_LOCATION_LINKS = [
 ];
 
 const TRUST_ITEMS = [
-  { icon: "🏷️", title: "Zero Brokerage", note: "No Hidden Charges" },
-  { icon: "📄", title: "Verified Listings", note: "100% Genuine Owners" },
-  { icon: "🤝", title: "Expert Guidance", note: "From Rental Advisors" },
-  { icon: "🔒", title: "Secure & Transparent", note: "Trusted by 10,000+ Tenants" },
-  { icon: "📞", title: "Quick Assistance", note: "Call us: 1800 41 99099" },
+  { icon: Tag, title: "Zero Brokerage", note: "No Hidden Charges" },
+  { icon: FileCheck, title: "Verified Listings", note: "100% Genuine Owners" },
+  { icon: Users, title: "Expert Guidance", note: "From Rental Advisors" },
+  { icon: Lock, title: "Secure & Transparent", note: "Trusted by 10,000+ Tenants" },
+  { icon: PhoneCall, title: "Quick Assistance", note: "Call us: 1800 41 99099" },
 ];
 
-function ColumnHeading({ icon, children }) {
+function ColumnHeading({ icon: Icon, children }) {
+  const isComponent = typeof Icon === "function" || (typeof Icon === "object" && Icon !== null);
   return (
     <div className="group flex items-center gap-2 text-[15px] font-bold text-slate-900 cursor-default">
-      <span className="text-[#a98440] transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
-        {icon}
+      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-amber-50 text-[#a98440] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+        {isComponent ? <Icon className="h-4 w-4" /> : <span>{Icon}</span>}
       </span>
       <span>{children}</span>
     </div>
@@ -83,9 +97,7 @@ function MenuLink({ item, onClose }) {
       <span className="transition-colors duration-200 group-hover:font-medium">
         {item.label}
       </span>
-      <span className="opacity-0 -translate-x-2 text-xs font-bold text-[#a98440] transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">
-        →
-      </span>
+      <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 text-[#a98440] transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
     </Link>
   );
 }
@@ -96,7 +108,7 @@ export default function RentMegaMenu({ onClose = () => {} }) {
       <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1fr_1fr_320px] panel-content-stagger">
         {/* Property Type */}
         <div>
-          <ColumnHeading icon="🏠">Property Type</ColumnHeading>
+          <ColumnHeading icon={Home}>Property Type</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {PROPERTY_TYPE_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -104,7 +116,7 @@ export default function RentMegaMenu({ onClose = () => {} }) {
           </div>
 
           <div className="mt-6 border-t border-slate-100 pt-4">
-            <ColumnHeading icon="📊">By BHK</ColumnHeading>
+            <ColumnHeading icon={BarChart3}>By BHK</ColumnHeading>
             <div className="mt-4 space-y-2.5">
               {RENT_BHK_LINKS.map((item) => (
                 <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -115,7 +127,7 @@ export default function RentMegaMenu({ onClose = () => {} }) {
 
         {/* Furnishing */}
         <div>
-          <ColumnHeading icon="🛋️">Furnishing</ColumnHeading>
+          <ColumnHeading icon={Armchair}>Furnishing</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {FURNISHING_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -134,7 +146,7 @@ export default function RentMegaMenu({ onClose = () => {} }) {
 
         {/* Budget */}
         <div>
-          <ColumnHeading icon="💰">Monthly Budget</ColumnHeading>
+          <ColumnHeading icon={Coins}>Monthly Budget</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {BUDGET_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -144,7 +156,7 @@ export default function RentMegaMenu({ onClose = () => {} }) {
 
         {/* Top Locations */}
         <div>
-          <ColumnHeading icon="📍">Top Locations</ColumnHeading>
+          <ColumnHeading icon={MapPin}>Top Locations</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {RENT_LOCATION_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -234,7 +246,9 @@ export default function RentMegaMenu({ onClose = () => {} }) {
             key={item.title}
             className="group flex items-center gap-3 rounded-xl p-2 -m-1 transition-all duration-200 hover:bg-slate-50 hover:scale-[1.03] cursor-pointer"
           >
-            <span className="text-lg transition-transform duration-200 group-hover:scale-125">{item.icon}</span>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-[#a98440] transition-transform duration-200 group-hover:scale-115">
+              <item.icon className="h-4 w-4" />
+            </span>
             <div>
               <p className="text-[12px] font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
                 {item.title}

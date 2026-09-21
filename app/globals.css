@@ -77,6 +77,22 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
+.glass-search-card {
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.glass-search-tab {
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  backdrop-filter: blur(20px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.85);
+  border-left: 1px solid rgba(255, 255, 255, 0.85);
+  border-right: 1px solid rgba(255, 255, 255, 0.85);
+}
+
 /* Buttons & Pills */
 .pill-btn {
   background: #ffffff;
@@ -393,4 +409,90 @@ body {
 
 .animate-mega-backdrop {
   animation: megaBackdropFade 0.25s ease-out forwards;
+}
+
+/* Smooth cinematic project image swap animation */
+@keyframes projectImageFadeIn {
+  0% {
+    opacity: 0.15;
+    transform: scale(1.04);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-image-swap {
+  animation: projectImageFadeIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform, filter;
+}
+
+/* Route Page Transition - Smooth fade without breaking position:fixed viewport containment */
+@keyframes pageTransitionEnter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-page-enter {
+  animation: pageTransitionEnter 0.24s ease-out;
+}
+
+/* Carousel Page Change Number Pop */
+@keyframes pageNumberPop {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8) translateY(2px);
+  }
+  55% {
+    transform: scale(1.1) translateY(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-page-number-pop {
+  animation: pageNumberPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  display: inline-block;
+}
+
+/* Carousel Page Slide Nudge */
+@keyframes carouselNudgeRight {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-12px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes carouselNudgeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(12px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-carousel-right {
+  animation: carouselNudgeRight 0.38s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.animate-carousel-left {
+  animation: carouselNudgeLeft 0.38s cubic-bezier(0.2, 0.85, 0.3, 1);
 }

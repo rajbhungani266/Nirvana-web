@@ -4,55 +4,45 @@ import Link from "next/link";
 
 const PROPERTY_TYPES = [
   {
-    title: "Luxury Apartments",
+    title: "Apartment",
     subtitle: "8,400+ Properties",
-    desc: "2, 3 & 4 BHK high-rises in prime city hubs",
-    img: "/images/first.jpg",
-    bg: "bg-[#fff7eb]",
-    badgeBg: "bg-amber-100 text-amber-900",
+    img: "/images/type-apartment.jpg",
+    bg: "bg-[#fef5e7]",
     href: "/residential",
   },
   {
-    title: "Independent Villas",
+    title: "Independent House / Villa",
     subtitle: "1,800+ Properties",
-    desc: "Private gated communities & luxury bungalows",
-    img: "/images/second.jpg",
-    bg: "bg-[#fbf7ee]",
-    badgeBg: "bg-[#a98440]/15 text-[#a98440]",
+    img: "/images/type-villa.jpg",
+    bg: "bg-[#edf5fd]",
     href: "/residential?property_type=villa",
   },
   {
-    title: "Residential Plots",
+    title: "Residential Land",
     subtitle: "1,100+ Properties",
-    desc: "Clear-title land in emerging growth corridors",
-    img: "/images/hero-water-mansion.jpg",
-    bg: "bg-[#eef9f1]",
-    badgeBg: "bg-emerald-100 text-emerald-900",
+    img: "/images/type-land.jpg",
+    bg: "bg-[#eaf5ed]",
     href: "/plot-weekend-villa",
   },
   {
-    title: "Commercial & Retail",
+    title: "Commercial Space",
     subtitle: "2,400+ Properties",
-    desc: "Grade-A office towers & high-footfall shops",
-    img: "/images/hero-gift-tower.jpg",
-    bg: "bg-[#f5f3ff]",
-    badgeBg: "bg-purple-100 text-purple-900",
+    img: "/images/type-commercial.jpg",
+    bg: "bg-[#e5f5ea]",
     href: "/commercial",
   },
   {
     title: "Penthouses & Estates",
     subtitle: "650+ Properties",
-    desc: "Sky mansions & weekend farmland retreats",
-    img: "/images/ninth.png",
-    bg: "bg-[#fff1f2]",
-    badgeBg: "bg-rose-100 text-rose-900",
+    img: "/images/type-community.jpg",
+    bg: "bg-[#fef5e7]",
     href: "/plot-weekend-villa",
   },
 ];
 
 export default function BrowsePropertyTypes() {
   return (
-    <section className="bg-[#f8fafc] py-24 text-slate-950">
+    <section className="bg-white py-16 sm:py-20 lg:py-24 text-slate-950">
       <div className="container-box">
         {/* Section Heading */}
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-end">
@@ -74,38 +64,31 @@ export default function BrowsePropertyTypes() {
           </div>
         </div>
 
-        {/* 5-Column Responsive Cards Grid */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {/* 5-Column Responsive Cards Grid (Matching Reference Image 2) */}
+        <div className="mt-12 sm:mt-14 grid gap-5 sm:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {PROPERTY_TYPES.map((card, idx) => (
             <Link
               key={idx}
               href={card.href}
-              className={`group flex flex-col justify-between overflow-hidden rounded-[26px] border border-slate-200/80 ${card.bg} p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#a98440]/40`}
+              className={`group flex flex-col justify-between overflow-hidden rounded-[22px] border border-slate-200/70 ${card.bg} shadow-xs transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-slate-300`}
             >
-              <div>
-                <span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${card.badgeBg}`}>
-                  {card.subtitle}
-                </span>
-
-                <h3 className="heading-display mt-5 text-xl font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
+              {/* Top Text Content: Title & Subtitle without pill badges */}
+              <div className="p-5 sm:p-6 pb-4">
+                <h3 className="heading-display text-lg sm:text-xl font-bold text-slate-800 leading-tight group-hover:text-[#a98440] transition-colors whitespace-pre-line">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  {card.desc}
+                <p className="mt-1.5 text-xs sm:text-sm font-medium text-slate-400">
+                  {card.subtitle}
                 </p>
               </div>
 
-              <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200/60 bg-white shadow-inner">
+              {/* Bottom Bleed Image: Flush against left, right, and bottom edges */}
+              <div className="relative mt-auto h-40 sm:h-44 md:h-48 w-full overflow-hidden">
                 <img
                   src={card.img}
                   alt={card.title}
-                  className="h-36 w-full object-cover transition duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-              </div>
-
-              <div className="mt-4 flex items-center justify-between text-xs font-bold text-[#a98440]">
-                <span>Browse Listings</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
               </div>
             </Link>
           ))}

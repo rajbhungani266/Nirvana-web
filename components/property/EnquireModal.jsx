@@ -22,7 +22,7 @@ export default function EnquireModal({ property, category, onClose }) {
       });
       setStatus("Your enquiry has been submitted successfully.");
       setForm({ name: "", email: "", phone: "" });
-    } catch (error) {
+    } catch {
       setStatus("Something went wrong. Please try again.");
     }
   }

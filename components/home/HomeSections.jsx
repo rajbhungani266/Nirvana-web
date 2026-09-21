@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const CATEGORIES = [
@@ -47,8 +49,40 @@ const CATEGORIES = [
 
 export default function HomeSections() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white pt-8 pb-6 sm:pt-10 sm:pb-8">
       <div className="container-box">
+                {/* Discover Properties Stats Section (Matches Figma Image 1) */}
+        <div className="mb-16 grid gap-10 md:grid-cols-2 items-center">
+          <div className="max-w-xl">
+            <h2 className="heading-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-slate-900 md:text-4xl lg:text-[2.6rem]">
+              Discover Properties That Match Your Goals
+            </h2>
+            <p className="mt-4 text-[13px] sm:text-sm leading-relaxed text-slate-500">
+              Whether you are buying your first property, searching for investment opportunities, or exploring future growth locations, discover curated options designed to help you move faster and choose with confidence.
+            </p>
+            
+            <div className="mt-8 flex flex-col md:flex-row gap-6 md:gap-10">
+              <div>
+                <h3 className="text-3xl font-extrabold text-slate-900">500+</h3>
+                <p className="text-xs text-slate-500 mt-1">Verified Opportunities</p>
+              </div>
+              <div className="hidden md:block w-px bg-slate-200"></div>
+              <div>
+                <h3 className="text-3xl font-extrabold text-slate-900">50K+</h3>
+                <p className="text-xs text-slate-500 mt-1">Searches Every Month</p>
+              </div>
+              <div className="hidden md:block w-px bg-slate-200"></div>
+              <div>
+                <h3 className="text-3xl font-extrabold text-slate-900">10+ Years</h3>
+                <p className="text-xs text-slate-500 mt-1">Market Experience</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative h-[240px] md:h-[340px] w-full overflow-hidden rounded-[24px]">
+            <img src="/images/eleventh.png" alt="Properties" className="h-full w-full object-cover" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80' }} />
+          </div>
+        </div>
+
         <div className="mb-14 grid gap-8 xl:grid-cols-[1.5fr_1fr] items-end">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
@@ -69,34 +103,34 @@ export default function HomeSections() {
         </div>
 
         {/* 3-Column Grid */}
-        <div className="grid gap-7 md:grid-cols-3">
+        <div className="grid gap-5 grid-cols-1 md:grid-cols-3">
           {CATEGORIES.map((cat, idx) => (
             <div
               key={idx}
-              className={`group flex flex-col justify-between rounded-[28px] border ${cat.borderColor} bg-gradient-to-b ${cat.bgGradient} p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#a98440]/40`}
+              className={`group flex flex-col justify-between rounded-[24px] border ${cat.borderColor} bg-gradient-to-b ${cat.bgGradient} p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#a98440]/40`}
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-[14px] bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
                     {cat.icon}
                   </div>
-                  <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm border border-slate-100">
+                  <span className="rounded-full bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 shadow-sm border border-slate-100">
                     {cat.badge}
                   </span>
                 </div>
 
-                <h3 className="heading-display mt-6 text-xl font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
+                <h3 className="heading-display mt-5 text-lg font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
                   {cat.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-[13px] leading-relaxed text-slate-600">
                   {cat.desc}
                 </p>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-100/80">
+              <div className="mt-6 pt-5 border-t border-slate-100/80">
                 <Link
                   href={cat.href}
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#a98440] group-hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-[13px] font-bold text-[#a98440] group-hover:gap-3 transition-all"
                 >
                   <span>{cat.linkText}</span>
                   <span className="transition-transform group-hover:translate-x-1">→</span>

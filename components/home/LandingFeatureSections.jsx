@@ -134,7 +134,7 @@ export default function LandingFeatureSections() {
 
       {/* 3. Social Proof & Testimonials */}
       <div className="container-box pb-24">
-        <div className="rounded-[32px] border border-slate-200 bg-white p-8 md:p-12 shadow-xl">
+        <div className="pt-8 md:pt-12">
           <div className="grid gap-10 xl:grid-cols-[0.8fr_1.2fr] items-center">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
@@ -151,15 +151,15 @@ export default function LandingFeatureSections() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-[24px] bg-[#fbf7ee] border border-[#e2d1b3]/60 p-6 text-center shadow-xs">
+              <div className="p-6 text-center">
                 <p className="heading-display text-3xl font-extrabold text-[#a98440]">₹450 Cr+</p>
                 <p className="mt-2 text-xs font-medium text-slate-600">Property Value Advised</p>
               </div>
-              <div className="rounded-[24px] bg-[#fbf7ee] border border-[#e2d1b3]/60 p-6 text-center shadow-xs">
+              <div className="p-6 text-center">
                 <p className="heading-display text-3xl font-extrabold text-[#a98440]">99.2%</p>
                 <p className="mt-2 text-xs font-medium text-slate-600">Client Satisfaction Rate</p>
               </div>
-              <div className="rounded-[24px] bg-[#fbf7ee] border border-[#e2d1b3]/60 p-6 text-center shadow-xs">
+              <div className="p-6 text-center">
                 <p className="heading-display text-3xl font-extrabold text-[#a98440]">240+</p>
                 <p className="mt-2 text-xs font-medium text-slate-600">Verified Project Catalogs</p>
               </div>

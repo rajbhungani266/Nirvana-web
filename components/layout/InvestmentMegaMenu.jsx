@@ -1,6 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import {
+  TrendingUp,
+  Calculator,
+  Coins,
+  MapPin,
+  BarChart3,
+  Tag,
+  Users,
+  Lock,
+  PhoneCall,
+  Sparkles,
+  Star,
+  FileEdit,
+  ArrowRight,
+} from "lucide-react";
 
 // Query params match the backend's InvestmentProperty filterset_fields
 // exactly (see backcode views.py). Labels with no real matching choice
@@ -39,18 +54,18 @@ export const INVESTMENT_LOCATION_LINKS = [
 ];
 
 const TRUST_ITEMS = [
-  { icon: "📊", title: "Verified ROI Data", note: "Backed by Market Research" },
-  { icon: "🏷️", title: "Zero Brokerage", note: "Direct from Builders" },
-  { icon: "🤝", title: "Expert Guidance", note: "From Investment Advisors" },
-  { icon: "🔒", title: "Secure & Transparent", note: "Trusted by 10,000+ Investors" },
-  { icon: "📞", title: "Quick Assistance", note: "Call us: 1800 41 99099" },
+  { icon: BarChart3, title: "Verified ROI Data", note: "Backed by Market Research" },
+  { icon: Tag, title: "Zero Brokerage", note: "Direct from Builders" },
+  { icon: Users, title: "Expert Guidance", note: "From Investment Advisors" },
+  { icon: Lock, title: "Secure & Transparent", note: "Trusted by 10,000+ Investors" },
+  { icon: PhoneCall, title: "Quick Assistance", note: "Call us: 1800 41 99099" },
 ];
 
-function ColumnHeading({ icon, children }) {
+function ColumnHeading({ icon: Icon, children }) {
   return (
-    <div className="group flex items-center gap-2 text-[15px] font-bold text-slate-900 cursor-default">
-      <span className="text-[#a98440] transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6">
-        {icon}
+    <div className="group flex items-center gap-2.5 text-[15px] font-bold text-slate-900 cursor-default">
+      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#a98440]/10 text-[#a98440] transition-transform duration-300 group-hover:scale-110">
+        <Icon className="h-4 w-4" />
       </span>
       <span>{children}</span>
     </div>
@@ -72,9 +87,7 @@ function MenuLink({ item, onClose }) {
           </span>
         )}
       </span>
-      <span className="opacity-0 -translate-x-2 text-xs font-bold text-[#a98440] transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">
-        →
-      </span>
+      <ArrowRight className="opacity-0 -translate-x-2 h-3.5 w-3.5 text-[#a98440] transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
     </Link>
   );
 }
@@ -85,7 +98,7 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
       <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1fr_1fr_320px] panel-content-stagger">
         {/* Investment Type */}
         <div>
-          <ColumnHeading icon="📈">Investment Type</ColumnHeading>
+          <ColumnHeading icon={TrendingUp}>Investment Type</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {INVESTMENT_TYPE_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -98,13 +111,13 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
             className="group mt-5 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#a98440] transition-all duration-200 hover:text-[#977232] hover:translate-x-1"
           >
             <span>View all Investments</span>
-            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
 
         {/* Investment Tools */}
         <div>
-          <ColumnHeading icon="🧮">Investment Tools</ColumnHeading>
+          <ColumnHeading icon={Calculator}>Investment Tools</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {INVESTMENT_TOOL_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -114,7 +127,7 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
 
         {/* Budget */}
         <div>
-          <ColumnHeading icon="💰">Budget</ColumnHeading>
+          <ColumnHeading icon={Coins}>Budget</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {INVESTMENT_BUDGET_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -124,7 +137,7 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
 
         {/* Top Locations */}
         <div>
-          <ColumnHeading icon="📍">Top Locations</ColumnHeading>
+          <ColumnHeading icon={MapPin}>Top Locations</ColumnHeading>
           <div className="mt-4 space-y-2.5">
             {INVESTMENT_LOCATION_LINKS.map((item) => (
               <MenuLink key={item.label} item={item} onClose={onClose} />
@@ -141,17 +154,19 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
             <Link
               href="/post-property"
               onClick={onClose}
-              className="mt-3 inline-flex items-center gap-2 rounded-xl border border-[#a98440] px-3.5 py-2 text-[12px] font-bold text-[#a98440] transition-all duration-200 hover:bg-[#a98440] hover:text-white hover:scale-105 active:scale-95 shadow-xs"
+              className="mt-3 inline-flex items-center gap-1.5 rounded-xl border border-[#a98440] px-3.5 py-2 text-[12px] font-bold text-[#a98440] transition-all duration-200 hover:bg-[#a98440] hover:text-white hover:scale-105 active:scale-95 shadow-xs"
             >
-              📝 Post Requirement
+              <FileEdit className="h-3.5 w-3.5" />
+              <span>Post Requirement</span>
             </Link>
           </div>
         </div>
 
         {/* Featured Opportunity card */}
         <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#fbf7ee] to-white p-4.5 ring-1 ring-[#e2d1b3]/70 shadow-sm transition-all duration-300 hover:shadow-xl hover:ring-[#a98440]/60 hover:-translate-y-1">
-          <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold text-[#a98440] transition-transform duration-200 group-hover:scale-105">
-            ⭐ Featured Opportunity
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold text-[#a98440] transition-transform duration-200 group-hover:scale-105">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Featured Opportunity</span>
           </span>
 
           <h4 className="mt-3 text-lg font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
@@ -191,7 +206,10 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
               <p className="text-[10px] text-slate-500">ROI Potential</p>
             </div>
             <div>
-              <p className="text-sm font-bold text-amber-500">★ 9.6/10</p>
+              <p className="text-sm font-bold text-amber-500 flex items-center justify-center gap-1">
+                <Star className="h-3 w-3 fill-amber-400" />
+                <span>9.6/10</span>
+              </p>
               <p className="text-[10px] text-slate-500">Score</p>
             </div>
           </div>
@@ -204,9 +222,10 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
           <Link
             href="/investment"
             onClick={onClose}
-            className="mt-3 block rounded-xl bg-[#a98440] hover:bg-[#977232] py-2.5 text-center text-[13px] font-bold text-white shadow-sm transition-all duration-200 hover:shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer"
+            className="mt-3 flex items-center justify-center gap-1.5 rounded-xl bg-[#a98440] hover:bg-[#977232] py-2.5 text-center text-[13px] font-bold text-white shadow-sm transition-all duration-200 hover:shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer"
           >
-            View Project Details →
+            <span>View Project Details</span>
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
@@ -218,7 +237,9 @@ export default function InvestmentMegaMenu({ onClose = () => {} }) {
             key={item.title}
             className="group flex items-center gap-3 rounded-xl p-2 -m-1 transition-all duration-200 hover:bg-slate-50 hover:scale-[1.03] cursor-pointer"
           >
-            <span className="text-lg transition-transform duration-200 group-hover:scale-125">{item.icon}</span>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-[#a98440] transition-transform duration-200 group-hover:scale-115">
+              <item.icon className="h-4 w-4" />
+            </span>
             <div>
               <p className="text-[12px] font-bold text-slate-900 group-hover:text-[#a98440] transition-colors">
                 {item.title}

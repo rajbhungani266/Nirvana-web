@@ -6,9 +6,9 @@ import Footer from "@/components/layout/Footer";
 export default function PostPropertyPage() {
   return (
     <main className="min-h-screen bg-[#f7f9fc]">
-      <section className="bg-soft-blue pb-8 pt-24">
+      <section className="bg-soft-blue pb-6 pt-20 sm:pt-22">
         <Navbar />
-        <div className="container-box pt-12">
+        <div className="container-box pt-2 sm:pt-3">
           <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
             Post Your Property
           </h1>

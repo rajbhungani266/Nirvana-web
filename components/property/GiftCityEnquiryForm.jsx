@@ -65,7 +65,7 @@ export default function GiftCityEnquiryForm() {
         budget: BUDGET_OPTIONS[0],
         message: "",
       });
-    } catch (error) {
+    } catch {
       setStatus("Something went wrong. Please try again.");
     }
   }

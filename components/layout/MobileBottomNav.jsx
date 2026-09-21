@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, Compass, Sparkles, Navigation, PlusCircle } from "lucide-react";
 
 export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
   const pathname = usePathname();
@@ -19,9 +20,7 @@ export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
             isHome ? "font-bold text-[#a98440]" : "hover:text-slate-900"
           }`}
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isHome ? 2.5 : 2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-          </svg>
+          <Home className="h-5 w-5" strokeWidth={isHome ? 2.5 : 1.8} />
           <span>Home</span>
         </Link>
 
@@ -31,9 +30,7 @@ export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
             isBrowse ? "font-bold text-[#a98440]" : "hover:text-slate-900"
           }`}
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isBrowse ? 2.5 : 2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-          </svg>
+          <Compass className="h-5 w-5" strokeWidth={isBrowse ? 2.5 : 1.8} />
           <span>Explore</span>
         </Link>
 
@@ -42,8 +39,8 @@ export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
           onClick={onOpenAISearch}
           className="flex flex-col items-center justify-center gap-1 -mt-4 transition-transform active:scale-95 cursor-pointer"
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#a98440] text-white shadow-lg shadow-[#a98440]/30">
-            <span className="text-xl">✨</span>
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#a98440] to-[#c79c52] text-white shadow-lg shadow-[#a98440]/30 transition-transform hover:scale-105">
+            <Sparkles className="h-5 w-5 animate-pulse" />
           </div>
           <span className="text-[10px] font-bold text-[#a98440]">AI Search</span>
         </button>
@@ -51,12 +48,9 @@ export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
         {/* Vastu Calculator */}
         <button
           onClick={onOpenVastu}
-          className="flex flex-col items-center justify-center gap-1 hover:text-slate-900 transition-colors cursor-pointer"
+          className="flex flex-col items-center justify-center gap-1 hover:text-slate-900 transition-colors cursor-pointer text-slate-500"
         >
-          <svg className="h-5 w-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" strokeWidth="2" />
-            <polygon points="12,6 14,12 12,18 10,12" fill="currentColor" opacity="0.4" />
-          </svg>
+          <Navigation className="h-5 w-5" strokeWidth={1.8} />
           <span>Vastu</span>
         </button>
 
@@ -66,9 +60,7 @@ export default function MobileBottomNav({ onOpenAISearch, onOpenVastu }) {
             isPost ? "font-bold text-[#a98440]" : "hover:text-slate-900"
           }`}
         >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isPost ? 2.5 : 2} d="M12 4v16m8-8H4" />
-          </svg>
+          <PlusCircle className="h-5 w-5" strokeWidth={isPost ? 2.5 : 1.8} />
           <span>Post</span>
         </Link>
       </div>

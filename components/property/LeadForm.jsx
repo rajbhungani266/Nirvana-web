@@ -39,7 +39,7 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
         email: "",
         message: "",
       });
-    } catch (error) {
+    } catch {
       setStatus("Something went wrong. Please try again.");
     }
   }
@@ -47,21 +47,21 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border bg-white p-5 shadow-sm"
+      className="flex flex-col gap-3 rounded-xl border border-slate-100 bg-white p-3 shadow-sm"
     >
-      <div className="rounded-xl bg-[#a98440] p-4 text-white">
-        <h3 className="font-bold">Schedule Your Free Site Visit</h3>
-        <p className="mt-1 text-xs text-white/80">
+      <div className="rounded-lg bg-[#a98440] p-3 text-white">
+        <h3 className="text-sm font-bold">Schedule Your Free Site Visit</h3>
+        <p className="mt-0.5 text-[11px] leading-tight text-white/90">
           Share your details and our advisor will connect with you.
         </p>
       </div>
 
-      <div className="mt-5 space-y-4">
+      <div className="flex flex-col gap-2.5 mt-1">
         <input
           name="name"
           value={form.name}
           onChange={handleChange}
-          className="input-clean"
+          className="input-clean py-2 px-3 text-sm"
           placeholder="Name"
           required
         />
@@ -70,7 +70,7 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          className="input-clean"
+          className="input-clean py-2 px-3 text-sm"
           placeholder="Mobile number"
           required
         />
@@ -79,7 +79,7 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
           name="email"
           value={form.email}
           onChange={handleChange}
-          className="input-clean"
+          className="input-clean py-2 px-3 text-sm"
           placeholder="Email Address"
         />
 
@@ -87,15 +87,15 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
           name="message"
           value={form.message}
           onChange={handleChange}
-          className="input-clean min-h-24"
+          className="input-clean min-h-16 py-2 px-3 text-sm"
           placeholder="Message"
         />
 
-        <button className="w-full rounded-xl bg-[#a98440] hover:bg-[#977232] py-3 text-sm font-bold text-white shadow-xs transition active:scale-95 cursor-pointer">
+        <button className="w-full rounded-xl bg-[#a98440] hover:bg-[#977232] py-2.5 text-sm font-bold text-white shadow-xs transition active:scale-95 cursor-pointer mt-1">
           Submit
         </button>
 
-        {status && <p className="text-sm text-slate-600">{status}</p>}
+        {status && <p className="text-xs text-center text-slate-600">{status}</p>}
       </div>
     </form>
   );
