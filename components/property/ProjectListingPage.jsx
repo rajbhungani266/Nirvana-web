@@ -232,7 +232,7 @@ function ListingPageFallback({ title }) {
 }
 
 function ProjectListingPageInner({
-  title = "Sindhubhavan Road, Ahmedabad",
+  title = "Properties in Ahmedabad",
   endpoint,
   category,
   defaultQuery = "",
@@ -256,8 +256,9 @@ function ProjectListingPageInner({
   const [tab, setTab] = useState("new"); // "new" | "owner"
   const [showAdvisorPhone, setShowAdvisorPhone] = useState(false);
 
-  const [search, setSearch] = useState(urlParams.get("search") ?? "");
-  const [localityFilter, setLocalityFilter] = useState("Sindhubhavan Road");
+  const initialSearch = urlParams.get("search") ?? urlParams.get("area__iexact") ?? urlParams.get("area") ?? "";
+  const [search, setSearch] = useState(initialSearch);
+  const [localityFilter, setLocalityFilter] = useState("");
   const [possession, setPossession] = useState("");
   const [city, setCity] = useState(urlParams.get("city") ?? "");
   const [bhk, setBhk] = useState(urlParams.get("bedrooms") ?? "");
@@ -360,6 +361,13 @@ function ProjectListingPageInner({
   }
 
   const count = properties.length;
+  const displayLocation = (search || localityFilter || "").trim();
+  const activeCity = city || "Ahmedabad";
+  const dynamicTitle = displayLocation
+    ? (displayLocation.toLowerCase().includes(activeCity.toLowerCase())
+        ? displayLocation
+        : `${displayLocation}, ${activeCity}`)
+    : title;
 
   return (
     <main className="min-h-screen bg-[#f7f9fc]">
@@ -370,7 +378,7 @@ function ProjectListingPageInner({
           {/* Header Row matching Image 1 */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="text-xl font-normal text-slate-700 md:text-2xl flex items-baseline gap-2 flex-wrap">
-              <span>{localityFilter ? `${localityFilter}, Ahmedabad` : title}</span>
+              <span>{dynamicTitle}</span>
               <span className="text-sm font-normal text-slate-500">
                 ({count} Projects)
               </span>
@@ -422,18 +430,38 @@ function ProjectListingPageInner({
               />
             </div>
 
-            {/* Locality Pill Chip */}
-            {localityFilter && (
+            {/* Locality / Search Pill Chip */}
+            {displayLocation && (
               <div className="flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3 shadow-xs text-xs font-normal text-slate-700">
-                <span>{localityFilter}</span>
+                <span>{displayLocation}</span>
                 <button
                   type="button"
                   onClick={() => {
                     setLocalityFilter("");
-                    setTimeout(() => loadProperties(), 50);
+                    setSearch("");
+                    const params = new URLSearchParams(defaultQuery.replace(/^\?/, ""));
+                    Object.entries(extraParams).forEach(([key, value]) => params.set(key, value));
+                    if (city) params.set("city", city);
+                    if (bhk) params.set("bedrooms", bhk);
+                    if (propertyType) params.set(config.typeField, propertyType);
+                    if (possession) params.set("possession", possession);
+                    const range = budgetToRange(budget);
+                    const gte = range.gte ?? priceRangeFromUrl.gte;
+                    const lte = range.lte ?? priceRangeFromUrl.lte;
+                    if (gte) params.set("price__gte", String(gte));
+                    if (lte) params.set("price__lte", String(lte));
+                    if (sortBy) params.set("ordering", sortBy);
+                    params.set("listing_type", tab === "owner" ? "owner" : "builder");
+                    const qs = params.toString() ? `?${params.toString()}` : "";
+                    router.replace(`${pathname}${qs}`, { scroll: false });
+                    setLoading(true);
+                    fetchProperties(`${endpoint}${qs}`)
+                      .then((data) => setProperties(Array.isArray(data) ? data : []))
+                      .catch(() => setProperties([]))
+                      .finally(() => setLoading(false));
                   }}
                   className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer ml-1 flex items-center"
-                  title="Remove locality filter"
+                  title="Remove location filter"
                 >
                   <svg className="h-3.5 w-3.5 text-slate-500 hover:text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
