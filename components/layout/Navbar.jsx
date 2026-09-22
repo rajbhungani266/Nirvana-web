@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, User, Menu, X, ChevronDown, ChevronUp, Home, Square, TrendingUp, MapPin } from "lucide-react";
+import { Compass, PlusCircle, User, Menu, X, ChevronDown, ChevronUp, Home, Square, TrendingUp, MapPin } from "lucide-react";
 import BuyMegaMenu from "./BuyMegaMenu";
 import SellMegaMenu from "./SellMegaMenu";
 import RentMegaMenu from "./RentMegaMenu";
@@ -13,6 +13,7 @@ import GiftCityMegaMenu from "./GiftCityMegaMenu";
 import VastuCalculatorModal from "../tools/VastuCalculatorModal";
 import AISearchModal from "../tools/AISearchModal";
 import LoginModal from "./LoginModal";
+import PostPropertyModal from "../property/PostPropertyModal";
 
 // Matches Image 1: Buy, Sell, Rent, Investment, Plots, Gift City (Logo acts as Home)
 const TOP_NAV_LINKS = [
@@ -38,6 +39,7 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isPostPropertyOpen, setIsPostPropertyOpen] = useState(false);
   const [isVastuOpen, setIsVastuOpen] = useState(false);
   const [isAIOpen, setIsAIOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -213,17 +215,17 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Desktop Action Buttons */}
             <div className="hidden items-center gap-2.5 lg:flex">
-            {/* Vastu Calculator Button */}
+            {/* Post Property Button */}
             <button
-              onClick={() => setIsVastuOpen(true)}
+              onClick={() => setIsPostPropertyOpen(true)}
               className={`transition-all duration-300 cursor-pointer flex items-center ${
                 isScrolled
                   ? "pill-btn px-4 py-1.5 text-xs font-semibold text-slate-800 hover:text-[#a98440]"
                   : "rounded-full bg-[#0d1520] px-4.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-slate-900 active:scale-95"
               }`}
             >
-              <Compass className="h-3.5 w-3.5 mr-1.5 text-[#a98440]" />
-              <span>Vastu Calculator</span>
+              <PlusCircle className="h-3.5 w-3.5 mr-1.5 text-[#a98440]" />
+              <span>Post Property</span>
             </button>
 
             {/* Login Button */}
@@ -438,18 +440,20 @@ export default function Navbar() {
                 </Link>
               </div>
 
-              {/* Requirement Card */}
+              {/* Post Property Card */}
               <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                <h4 className="text-sm font-bold text-slate-900">Looking for something specific?</h4>
-                <p className="mt-1 text-[11px] text-slate-500">Post your requirement and we'll help you find the best.</p>
-                <Link
-                  href="/post-property"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-[#0284c7] bg-white py-2 text-xs font-bold text-[#0284c7] hover:bg-blue-50"
+                <h4 className="text-sm font-bold text-slate-900">Want to sell or rent your property?</h4>
+                <p className="mt-1 text-[11px] text-slate-500">List your property with Nirvana Spaces and reach thousands of verified buyers.</p>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsPostPropertyOpen(true);
+                  }}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#a98440] hover:bg-[#977232] py-2.5 text-xs font-bold text-white transition active:scale-95 cursor-pointer shadow-xs"
                 >
-                  <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  Post Requirement
-                </Link>
+                  <PlusCircle className="h-4 w-4" />
+                  Post Property
+                </button>
               </div>
 
               {/* Trust Badges Footer */}
@@ -511,6 +515,10 @@ export default function Navbar() {
       </div>
 
       {/* Interactive Modals */}
+      <PostPropertyModal
+        isOpen={isPostPropertyOpen}
+        onClose={() => setIsPostPropertyOpen(false)}
+      />
       <VastuCalculatorModal
         isOpen={isVastuOpen}
         onClose={() => setIsVastuOpen(false)}
