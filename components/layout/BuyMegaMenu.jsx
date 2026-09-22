@@ -35,7 +35,6 @@ export const RESIDENTIAL_LINKS = [
   { label: "Penthouses", href: "/residential?search=Penthouse" },
   { label: "Plots", href: "/plot-weekend-villa" },
   { label: "Luxury Homes", href: "/residential?is_featured=true" },
-  { label: "Farmhouses", href: "/plot-weekend-villa?property_type=farm_house" },
   { label: "Independent Houses", href: "/residential?property_type=bungalow" },
 ];
 
@@ -53,15 +52,12 @@ export const COMMERCIAL_LINKS = [
   { label: "Showrooms", href: "/commercial?commercial_type=showroom" },
   { label: "Warehouses", href: "/commercial?commercial_type=warehouse" },
   { label: "Industrial Properties", href: "/commercial?commercial_type=factory" },
-  { label: "Business Centers", href: "/commercial?search=Business Center" },
   { label: "Co-working Spaces", href: "/commercial?search=Co-working" },
 ];
 
 const COMMERCIAL_USE_LINKS = [
   { label: "Office", href: "/commercial?commercial_type=office" },
   { label: "Retail", href: "/commercial?commercial_type=shop" },
-  { label: "Industrial", href: "/commercial?commercial_type=factory" },
-  { label: "Logistics", href: "/commercial?commercial_type=warehouse" },
 ];
 
 export const INVESTMENT_LINKS = [
