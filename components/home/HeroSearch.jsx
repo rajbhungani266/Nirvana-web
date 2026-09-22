@@ -245,9 +245,10 @@ function highlightMatch(text, query) {
   }
 }
 
-function resolveDestination({ dealMode, categoryTab, propertyType, bedrooms, search }) {
+function resolveDestination({ dealMode, categoryTab, propertyType, bedrooms, search, city }) {
   const params = new URLSearchParams();
   if (search) params.set("search", search);
+  if (city) params.set("city", city);
   if (bedrooms) params.set("bedrooms", bedrooms);
 
   let path = "/residential";
@@ -538,11 +539,33 @@ export default function HeroSearch() {
       )
     : ALL_LOCATIONS.slice(0, 10); // Top popular places across India when empty
 
-  function handleSearch(customSearch) {
+  function handleSearch(customSearch, customCity) {
     const s = typeof customSearch === "string" ? customSearch : search;
     setIsLocationOpen(false);
     setIsTypeDropdownOpen(false);
-    router.push(resolveDestination({ dealMode, categoryTab, propertyType, bedrooms, search: s }));
+
+    let resolvedCity = customCity;
+    if (!resolvedCity && s) {
+      const match = ALL_LOCATIONS.find(
+        (l) =>
+          l.name.toLowerCase() === s.trim().toLowerCase() ||
+          l.city.toLowerCase() === s.trim().toLowerCase()
+      );
+      if (match) {
+        resolvedCity = match.city;
+      }
+    }
+
+    router.push(
+      resolveDestination({
+        dealMode,
+        categoryTab,
+        propertyType,
+        bedrooms,
+        search: s,
+        city: resolvedCity,
+      })
+    );
   }
 
   return (
@@ -767,7 +790,7 @@ export default function HeroSearch() {
                               onClick={() => {
                                 setSearch(loc.name);
                                 setIsLocationOpen(false);
-                                handleSearch(loc.name);
+                                handleSearch(loc.name, loc.city);
                               }}
                               className="group flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-all hover:bg-amber-50/70 hover:border-[#a98440]/30 border border-transparent cursor-pointer"
                             >

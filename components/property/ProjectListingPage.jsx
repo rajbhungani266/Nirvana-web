@@ -118,6 +118,13 @@ const CITY_OPTIONS = [
   { value: "Ahmedabad", label: "Ahmedabad" },
   { value: "Gandhinagar", label: "Gandhinagar" },
   { value: "GIFT City", label: "GIFT City" },
+  { value: "Surat", label: "Surat" },
+  { value: "Vadodara", label: "Vadodara" },
+  { value: "Mumbai", label: "Mumbai" },
+  { value: "Bangalore", label: "Bangalore" },
+  { value: "Pune", label: "Pune" },
+  { value: "Delhi NCR", label: "Delhi NCR" },
+  { value: "Goa", label: "Goa" },
 ];
 
 function CityDropdown({ city, setCity }) {
@@ -139,6 +146,9 @@ function CityDropdown({ city, setCity }) {
   }, [isOpen]);
 
   const activeLabel = city || "Ahmedabad";
+  const displayedOptions = CITY_OPTIONS.some((c) => c.value === activeLabel)
+    ? CITY_OPTIONS
+    : [{ value: activeLabel, label: activeLabel }, ...CITY_OPTIONS];
 
   return (
     <div ref={ref} className="relative flex items-center">
@@ -159,12 +169,12 @@ function CityDropdown({ city, setCity }) {
       </button>
 
       {isOpen && (
-        <div className="panel-drop-animation absolute left-0 top-[calc(100%+10px)] z-50 min-w-[140px] rounded-2xl border border-slate-200/90 bg-white p-1.5 shadow-[0_16px_36px_rgba(15,23,42,0.12)]">
+        <div className="panel-drop-animation absolute left-0 top-[calc(100%+10px)] z-50 min-w-[140px] max-h-60 overflow-y-auto rounded-2xl border border-slate-200/90 bg-white p-1.5 shadow-[0_16px_36px_rgba(15,23,42,0.12)]">
           <div className="px-2.5 pt-1 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1">
             City
           </div>
           <div className="space-y-0.5">
-            {CITY_OPTIONS.map((c) => {
+            {displayedOptions.map((c) => {
               const active = (city || "Ahmedabad") === c.value;
               return (
                 <button
@@ -353,7 +363,7 @@ function ProjectListingPageInner({
       isMounted = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy, tab]);
+  }, [sortBy, tab, city]);
 
   function handleSearch(event) {
     event.preventDefault();
