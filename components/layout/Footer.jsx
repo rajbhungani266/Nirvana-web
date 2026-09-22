@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PhoneCall, Mail, MapPin, Building2, ShieldCheck } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 export default function Footer() {
   return (
@@ -9,9 +10,8 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block group">
-              <img
-                src="/images/logo-dark.png"
-                alt="Nirvana Space - Built on Trust. Driven by Loyalty."
+              <BrandLogo
+                isDark={true}
                 className="h-18 sm:h-22 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow"
               />
             </Link>

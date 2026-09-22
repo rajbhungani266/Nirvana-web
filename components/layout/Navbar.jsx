@@ -14,6 +14,7 @@ import VastuCalculatorModal from "../tools/VastuCalculatorModal";
 import AISearchModal from "../tools/AISearchModal";
 import LoginModal from "./LoginModal";
 import PostPropertyModal from "../property/PostPropertyModal";
+import BrandLogo from "./BrandLogo";
 
 // Matches Image 1: Buy, Sell, Rent, Investment, Plots, Gift City (Logo acts as Home)
 const TOP_NAV_LINKS = [
@@ -194,9 +195,8 @@ export default function Navbar() {
           {/* 1. Left: Official Brand Logo */}
           <div className="flex items-center shrink-0">
             <Link href="/" className="flex items-center group py-0.5">
-              <img
-                src={isScrolled ? "/images/logo-dark.png" : "/images/logo-transparent.png"}
-                alt="Nirvana Space - Built on Trust. Driven by Loyalty."
+              <BrandLogo
+                isDark={isScrolled}
                 className="h-10 sm:h-11 md:h-12 lg:h-[52px] w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
               />
             </Link>
@@ -285,7 +285,7 @@ export default function Navbar() {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-            <img src="/images/logo.png" alt="Nirvana Space" className="h-8 sm:h-9 w-auto object-contain" />
+            <BrandLogo variant="solid" alt="Nirvana Space" className="h-8 sm:h-9 w-auto object-contain" />
             <button onClick={() => setIsMobileMenuOpen(false)} className="rounded-full bg-[#f8fafc] p-2 sm:p-2.5 text-[#0f172a] transition hover:bg-slate-100">
               <X className="h-5 w-5" strokeWidth={2.5} />
             </button>
