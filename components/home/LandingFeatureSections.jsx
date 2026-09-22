@@ -1,31 +1,90 @@
-const TESTIMONIALS = [
-  {
-    title: "Seamless High-Yield Investment",
-    text: "Found a pre-leased Grade-A corporate office in GIFT City with 8.5% net rental yield in under 3 weeks. Nirvana's documentation verification and title clearance were exemplary.",
-    author: "Rajesh Shah",
-    role: "Commercial Investor, Mumbai",
-    initials: "RS",
-    rating: 5,
-  },
-  {
-    title: "Found Our Dream Vastu Home",
-    text: "We spent months touring Shela and Bopal. Nirvana's team filtered out unverified projects and guided us straight to a 100% Vastu-aligned 3 BHK with optimal sunlight and zero brokerage.",
-    author: "Meera & Kunal Desai",
-    role: "Homebuyers, Shela",
-    initials: "MD",
-    rating: 5,
-  },
-  {
-    title: "Exceptional NRI Advisory",
-    text: "Operating from Dubai, I needed complete transparency, legal verification, and detailed video walk-throughs for my weekend villa investment near Thol. They handled everything flawlessly.",
-    author: "Vikram Singhania",
-    role: "NRI Investor, UAE",
-    initials: "VS",
-    rating: 5,
-  },
+"use client";
+
+import { useState } from "react";
+
+const TESTIMONIAL_SLIDES = [
+  [
+    {
+      title: "Awesome Design",
+      text: "Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.",
+      author: "Ali Tufan",
+      role: "Product Manager",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Awesome Design",
+      text: "Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.",
+      author: "Ali Tufan",
+      role: "Product Manager",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Awesome Design",
+      text: "Amazing design, easy to customize and a design quality superlative account on its cloud platform for the optimized performance. And we didn’t on our original designs.",
+      author: "Ali Tufan",
+      role: "Product Manager",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+  ],
+  [
+    {
+      title: "Seamless High-Yield Investment",
+      text: "Found a pre-leased Grade-A corporate office in GIFT City with 8.5% net rental yield in under 3 weeks. Nirvana's documentation verification and title clearance were exemplary.",
+      author: "Rajesh Shah",
+      role: "Commercial Investor, Mumbai",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Found Our Dream Vastu Home",
+      text: "We spent months touring Shela and Bopal. Nirvana's team filtered out unverified projects and guided us straight to a 100% Vastu-aligned 3 BHK with optimal sunlight and zero brokerage.",
+      author: "Meera & Kunal Desai",
+      role: "Homebuyers, Shela",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Exceptional NRI Advisory",
+      text: "Operating from Dubai, I needed complete transparency, legal verification, and detailed video walk-throughs for my weekend villa investment near Thol. They handled everything flawlessly.",
+      author: "Vikram Singhania",
+      role: "NRI Investor, UAE",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+  ],
+  [
+    {
+      title: "Unmatched Due Diligence",
+      text: "Every RERA detail, land title history, and master plan was verified before they even showed us the property. Complete confidence and zero broker hassle throughout.",
+      author: "Sanjay Mehta",
+      role: "Senior Advocate, Ahmedabad",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Ultra-Luxury Portfolio",
+      text: "The curated luxury collection on Iscon Ambli Road is second to none. Truly a private banking level advisory experience for prime luxury properties.",
+      author: "Kavita Singhal",
+      role: "Private Equity Partner",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+    {
+      title: "Top-Tier Commercial Guidance",
+      text: "From retail showroom scouting on Sindhubhavan Road to leasing agreements, Nirvana delivered high ROI options backed by solid market data.",
+      author: "Pooja Sharma",
+      role: "Retail Brand Director",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+      rating: 5,
+    },
+  ],
 ];
 
 export default function LandingFeatureSections() {
+  const [activeSlide, setActiveSlide] = useState(0);
   return (
     <section className="bg-[#f8fafc] text-slate-950">
       {/* 1. Explore Spaces Bento */}
@@ -119,70 +178,100 @@ export default function LandingFeatureSections() {
         </div>
       </div>
 
-      {/* 3. Social Proof & Testimonials */}
-      <div className="container-box pb-24">
-        <div className="pt-8 md:pt-12">
-          <div className="grid gap-10 xl:grid-cols-[0.8fr_1.2fr] items-center">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
-                Proven Client Satisfaction
-              </span>
-              <h2 className="heading-display mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl">
-                Trusted by 1,200+
-                <br />
-                Property Owners & Buyers
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                Independent guidance, curated projects, and an effortless advisory experience across Ahmedabad.
-              </p>
-            </div>
+      {/* 3. Social Proof & Testimonials - Exactly Matching Image 2 */}
+      <div className="container-box pb-24 pt-12 md:pt-16">
+        {/* Header & Stats Row */}
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start justify-between">
+          <div>
+            <h2 className="heading-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
+              Trusted by Buyers and
+              <br />
+              Investors
+            </h2>
 
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="p-6 text-center">
-                <p className="heading-display text-3xl font-extrabold text-[#a98440]">₹450 Cr+</p>
-                <p className="mt-2 text-xs font-medium text-slate-600">Property Value Advised</p>
+            {/* 3 Metrics Row directly under heading */}
+            <div className="mt-8 flex flex-wrap items-center gap-10 sm:gap-14">
+              <div>
+                <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">85%</p>
+                <p className="mt-1.5 text-xs sm:text-sm font-medium text-slate-500">Completed Property</p>
               </div>
-              <div className="p-6 text-center">
-                <p className="heading-display text-3xl font-extrabold text-[#a98440]">99.2%</p>
-                <p className="mt-2 text-xs font-medium text-slate-600">Client Satisfaction Rate</p>
+              <div>
+                <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">99%</p>
+                <p className="mt-1.5 text-xs sm:text-sm font-medium text-slate-500">Satisfied Customers</p>
               </div>
-              <div className="p-6 text-center">
-                <p className="heading-display text-3xl font-extrabold text-[#a98440]">240+</p>
-                <p className="mt-2 text-xs font-medium text-slate-600">Verified Project Catalogs</p>
+              <div>
+                <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">95%</p>
+                <p className="mt-1.5 text-xs sm:text-sm font-medium text-slate-500">Home ownership</p>
               </div>
             </div>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col justify-between p-4"
-              >
+          {/* Right Side Paragraph */}
+          <div className="lg:pt-2 lg:pl-8 max-w-lg">
+            <p className="text-sm sm:text-base leading-relaxed text-slate-500">
+              People choose Nirvana Space for reliable guidance, curated opportunities, and a smoother experience while exploring properties across Ahmedabad and surrounding growth locations.
+            </p>
+          </div>
+        </div>
+
+        {/* 3 Testimonial Cards */}
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {TESTIMONIAL_SLIDES[activeSlide].map((item, index) => (
+            <div
+              key={index}
+              className="relative flex flex-col justify-between rounded-[24px] border border-slate-200/80 bg-[#f9fafb] p-7 sm:p-8 transition-all duration-300 hover:shadow-md hover:border-slate-300"
+            >
+              {/* Subtle Double Quotation Mark Watermark */}
+              <div className="absolute top-6 right-7 text-4xl sm:text-5xl font-serif text-slate-200/80 select-none pointer-events-none leading-none">
+                “
+              </div>
+
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 pr-8">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600">
+                  &ldquo;{item.text}&rdquo;
+                </p>
+                <div className="mt-5 flex text-amber-400 text-sm tracking-wide">
+                  {"★".repeat(item.rating)}
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-center gap-3.5 pt-2">
+                <img
+                  src={item.avatar}
+                  alt={item.author}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80";
+                  }}
+                  className="h-11 w-11 rounded-full object-cover shadow-xs border border-slate-200 shrink-0"
+                />
                 <div>
-                  <div className="flex text-amber-400 text-sm mb-3">
-                    {"★".repeat(item.rating)}
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900">
-                    &ldquo;{item.title}&rdquo;
-                  </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">
-                    {item.text}
-                  </p>
-                </div>
-
-                <div className="mt-6 flex items-center gap-3 pt-4 border-t border-slate-200/60">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#a98440] to-[#e2b764] font-bold text-white text-xs shadow-md">
-                    {item.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">{item.author}</p>
-                    <p className="text-xs text-slate-500">{item.role}</p>
-                  </div>
+                  <p className="text-sm font-bold text-slate-900">{item.author}</p>
+                  <p className="text-xs text-slate-500">{item.role}</p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Carousel Pagination Dots matching Image 2 */}
+        <div className="mt-10 flex items-center justify-center gap-2">
+          {TESTIMONIAL_SLIDES.map((_, dotIndex) => (
+            <button
+              key={dotIndex}
+              type="button"
+              onClick={() => setActiveSlide(dotIndex)}
+              aria-label={`Go to slide ${dotIndex + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                activeSlide === dotIndex
+                  ? "w-6 bg-slate-900"
+                  : "w-2 bg-slate-300 hover:bg-slate-400"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
