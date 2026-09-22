@@ -362,12 +362,7 @@ function ProjectListingPageInner({
 
   const count = properties.length;
   const displayLocation = (search || localityFilter || "").trim();
-  const activeCity = city || "Ahmedabad";
-  const dynamicTitle = displayLocation
-    ? (displayLocation.toLowerCase().includes(activeCity.toLowerCase())
-        ? displayLocation
-        : `${displayLocation}, ${activeCity}`)
-    : title;
+  const pageTitle = city ? `Properties in ${city}` : title;
 
   return (
     <main className="min-h-screen bg-[#f7f9fc]">
@@ -378,7 +373,7 @@ function ProjectListingPageInner({
           {/* Header Row matching Image 1 */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="text-xl font-normal text-slate-700 md:text-2xl flex items-baseline gap-2 flex-wrap">
-              <span>{dynamicTitle}</span>
+              <span>{pageTitle}</span>
               <span className="text-sm font-normal text-slate-500">
                 ({count} Projects)
               </span>
@@ -529,6 +524,7 @@ function ProjectListingPageInner({
       <div className="container-box pt-2 pb-2">
         <p className="text-xs sm:text-sm font-medium text-slate-500">
           Showing {count} {tab === "new" ? "new projects" : "owner properties"}
+          {displayLocation ? ` for "${displayLocation}"` : ""}
         </p>
       </div>
 
