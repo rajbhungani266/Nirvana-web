@@ -117,13 +117,13 @@ export default function RentMegaMenu({ onClose = () => {} }) {
 
           <div className="mt-3.5 border-t border-slate-100 pt-2.5">
             <ColumnHeading icon={BarChart3}>By BHK</ColumnHeading>
-            <div className="mt-2 grid grid-cols-2 gap-1.5">
+            <div className="mt-2 grid grid-cols-4 gap-1">
               {RENT_BHK_LINKS.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={onClose}
-                  className="rounded-md bg-slate-50 border border-slate-100 px-2 py-1 text-center text-[11px] font-medium text-slate-700 hover:bg-[#a98440] hover:text-white hover:border-[#a98440] transition-all"
+                  className="rounded-md bg-slate-50 border border-slate-100 py-1 text-center text-[10.5px] font-medium text-slate-700 hover:bg-[#a98440] hover:text-white hover:border-[#a98440] transition-all whitespace-nowrap"
                 >
                   {item.label}
                 </Link>
