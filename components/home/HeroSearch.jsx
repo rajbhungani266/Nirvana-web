@@ -79,36 +79,105 @@ const BHK_OPTIONS = [
 ];
 
 const ALL_LOCATIONS = [
-  { name: "Sindhu Bhavan Road", area: "Bodakdev / Thaltej", city: "Ahmedabad", type: "Prime Corridor", tag: "Luxury Hub" },
-  { name: "SG Highway", area: "North-South Corridor", city: "Ahmedabad", type: "Commercial & Res.", tag: "Major Artery" },
-  { name: "Iscon Ambli Road", area: "Ambli", city: "Ahmedabad", type: "Ultra-Luxury Villas", tag: "High Appreciation" },
-  { name: "GIFT City", area: "IFSC Zone", city: "Gandhinagar", type: "Global Financial Hub", tag: "SEZ & FinTech" },
-  { name: "Science City Road", area: "Sola", city: "Ahmedabad", type: "Upscale Residential", tag: "Family Friendly" },
-  { name: "Bopal", area: "West Ahmedabad", city: "Ahmedabad", type: "Residential Hub", tag: "Fast Growth" },
-  { name: "South Bopal (SoBo)", area: "South Bopal", city: "Ahmedabad", type: "Modern Townships", tag: "High Demand" },
-  { name: "Prahlad Nagar", area: "Satellite", city: "Ahmedabad", type: "Commercial & Retail", tag: "Prime Corporate" },
-  { name: "Bodakdev", area: "Judges Bungalow Road", city: "Ahmedabad", type: "Elite Residential", tag: "Luxury Homes" },
-  { name: "Thaltej", area: "West Zone", city: "Ahmedabad", type: "Green & Peaceful", tag: "Premium Living" },
-  { name: "Satellite", area: "Central-West", city: "Ahmedabad", type: "Urban Center", tag: "Established" },
-  { name: "Vastrapur", area: "Near IIM / AlphaOne", city: "Ahmedabad", type: "Central City Hub", tag: "High Demand" },
-  { name: "Navrangpura", area: "Central Ahmedabad", city: "Ahmedabad", type: "Heritage & Business", tag: "Prime City" },
-  { name: "Naranpura", area: "Central-North", city: "Ahmedabad", type: "Residential Area", tag: "Established" },
-  { name: "Nikol", area: "East Ahmedabad", city: "Ahmedabad", type: "Emerging Corridor", tag: "Growth Potential" },
-  { name: "Naroda", area: "North-East", city: "Ahmedabad", type: "Industrial & Res.", tag: "Connectivity" },
-  { name: "Vaishnodevi Circle", area: "North SG Highway", city: "Ahmedabad", type: "New Launch Hotspot", tag: "Booming Corridor" },
-  { name: "Gota", area: "North Ahmedabad", city: "Ahmedabad", type: "Modern Living", tag: "Well Connected" },
-  { name: "Shela", area: "Near Club O7", city: "Ahmedabad", type: "High-Rise Living", tag: "Fast Growth" },
-  { name: "Shantigram", area: "Adani Township", city: "Ahmedabad", type: "Integrated Township", tag: "Golf Living" },
-  { name: "Chandkheda", area: "Near Gandhinagar Link", city: "Ahmedabad", type: "Twin City Corridor", tag: "Metro Connected" },
-  { name: "Sanand", area: "Industrial Belt", city: "Ahmedabad", type: "Auto & Tech Hub", tag: "High ROI" },
-  { name: "Maninagar", area: "South Ahmedabad", city: "Ahmedabad", type: "Cultural Center", tag: "Established" },
-  { name: "Paldi", area: "Riverfront Link", city: "Ahmedabad", type: "Prime Central", tag: "Riverfront Living" },
-  { name: "Kudasan", area: "Near PDPU / Bhaijipura", city: "Gandhinagar", type: "Knowledge Corridor", tag: "Upcoming Hub" },
-  { name: "Randesan", area: "GIFT City Link", city: "Gandhinagar", type: "High Growth Corridor", tag: "Modern Res." },
-  { name: "Raysan", area: "Gandhinagar Bypass", city: "Gandhinagar", type: "Riverside Residences", tag: "Scenic" },
-  { name: "Koba Circle", area: "Airport Corridor", city: "Gandhinagar", type: "Direct Airport Link", tag: "Prime Access" },
-  { name: "Motera", area: "Near Stadium", city: "Ahmedabad", type: "Sports & Res. Hub", tag: "Metro Connected" },
-  { name: "Jagatpur", area: "Near Gota", city: "Ahmedabad", type: "Affordable High-Rise", tag: "Modern Living" },
+  // Mumbai & MMR
+  { name: "Bandra West", area: "Pali Hill / Carter Road", city: "Mumbai", state: "Maharashtra", type: "Ultra-Luxury", tag: "Celebrity Hub" },
+  { name: "Worli", area: "Sea Link / Lower Parel", city: "Mumbai", state: "Maharashtra", type: "Prime Seafront", tag: "Skyscraper Boulevard" },
+  { name: "Juhu", area: "Juhu Beach / Tara Road", city: "Mumbai", state: "Maharashtra", type: "Luxury Villas", tag: "Elite Coastal" },
+  { name: "BKC (Bandra Kurla Complex)", area: "G Block Corporate Hub", city: "Mumbai", state: "Maharashtra", type: "Commercial IFSC", tag: "Financial Hub" },
+  { name: "Powai", area: "Hiranandani Gardens", city: "Mumbai", state: "Maharashtra", type: "Tech Hub & Living", tag: "Modern Township" },
+  { name: "Andheri West", area: "Lokhandwala / Versova", city: "Mumbai", state: "Maharashtra", type: "Central Commercial", tag: "High Demand" },
+  { name: "Navi Mumbai", area: "Palm Beach / Kharghar", city: "Navi Mumbai", state: "Maharashtra", type: "Planned City", tag: "Airport Corridor" },
+  { name: "Thane West", area: "Ghubunder Road / Majiwada", city: "Thane", state: "Maharashtra", type: "Residential & IT", tag: "Growth Corridor" },
+
+  // Delhi NCR
+  { name: "Golf Course Road", area: "DLF Phase 5 / Sector 42", city: "Gurugram", state: "Delhi NCR", type: "Ultra-Luxury Condos", tag: "Pinnacle of Luxury" },
+  { name: "Cyber City", area: "DLF CyberHub", city: "Gurugram", state: "Delhi NCR", type: "Corporate Tech Hub", tag: "Global Business" },
+  { name: "Golf Course Extension", area: "Sector 65 / 66", city: "Gurugram", state: "Delhi NCR", type: "Emerging Luxury", tag: "High Appreciation" },
+  { name: "Dwarka Expressway", area: "Sector 102 - 113", city: "Gurugram", state: "Delhi NCR", type: "Mega Expressway", tag: "New Launch Hotspot" },
+  { name: "South Delhi", area: "Greater Kailash / Vasant Kunj", city: "New Delhi", state: "Delhi", type: "Diplomatic & Elite", tag: "Prime Capital" },
+  { name: "Noida Expressway", area: "Sector 128 / 137 / 150", city: "Noida", state: "Delhi NCR", type: "Tech Corridor", tag: "Modern High-Rise" },
+  { name: "Greater Noida", area: "Pari Chowk / Yamuna Exp.", city: "Greater Noida", state: "Delhi NCR", type: "Integrated Hub", tag: "Affordable Growth" },
+
+  // Bengaluru (Bangalore)
+  { name: "Whitefield", area: "EPIP Zone / Hope Farm", city: "Bengaluru", state: "Karnataka", type: "Silicon Hub", tag: "Tech & Luxury Villas" },
+  { name: "Indiranagar", area: "100ft Road / Defence Colony", city: "Bengaluru", state: "Karnataka", type: "High Street & Res.", tag: "Prime Cultural" },
+  { name: "Koramangala", area: "Block 3 / 4 / 7", city: "Bengaluru", state: "Karnataka", type: "Startup Capital", tag: "Cosmopolitan" },
+  { name: "Sarjapur Road", area: "Carmelaram / Haralur", city: "Bengaluru", state: "Karnataka", type: "Fast Growth Corridor", tag: "High Demand" },
+  { name: "Hebbal", area: "Bellary Road / Manyata Tech", city: "Bengaluru", state: "Karnataka", type: "Airport Corridor", tag: "Lakefront Luxury" },
+  { name: "Electronic City", area: "Phase 1 & 2 IT Hub", city: "Bengaluru", state: "Karnataka", type: "IT Infrastructure", tag: "High Yield" },
+
+  // Hyderabad
+  { name: "HITEC City", area: "Madhapur / Cyber Towers", city: "Hyderabad", state: "Telangana", type: "Silicon Valley Hub", tag: "IT & Commercial" },
+  { name: "Gachibowli", area: "Financial District Arterial", city: "Hyderabad", state: "Telangana", type: "Corporate Tech", tag: "High ROI" },
+  { name: "Jubilee Hills", area: "Road No. 36 / 45", city: "Hyderabad", state: "Telangana", type: "Billionaires Hub", tag: "Exclusive Luxury" },
+  { name: "Banjara Hills", area: "Road No. 1 / 12", city: "Hyderabad", state: "Telangana", type: "Heritage Elite", tag: "Prime Central" },
+  { name: "Financial District", area: "Nanakramguda", city: "Hyderabad", state: "Telangana", type: "Skyscrapers", tag: "Corporate IFSC" },
+  { name: "Kondapur", area: "Near Botanical Garden", city: "Hyderabad", state: "Telangana", type: "Modern Living", tag: "Fast Growing" },
+
+  // Pune
+  { name: "Koregaon Park", area: "North Main Road", city: "Pune", state: "Maharashtra", type: "Heritage Lifestyle", tag: "Elite Living" },
+  { name: "Hinjewadi", area: "Phase 1 / 2 / 3 IT Park", city: "Pune", state: "Maharashtra", type: "Mega IT SEZ", tag: "Tech Employment" },
+  { name: "Baner", area: "Baner-Pashan Link Road", city: "Pune", state: "Maharashtra", type: "Urban High-Rise", tag: "High Demand" },
+  { name: "Viman Nagar", area: "Near Phoenix Marketcity", city: "Pune", state: "Maharashtra", type: "Airport Hub", tag: "Cosmopolitan" },
+  { name: "Kharadi", area: "EON IT Park / World Trade Center", city: "Pune", state: "Maharashtra", type: "Eastern IT Belt", tag: "Booming Hub" },
+  { name: "Wakad", area: "Near Hinjewadi Flyover", city: "Pune", state: "Maharashtra", type: "Residential Growth", tag: "High Appreciation" },
+
+  // Ahmedabad & Gandhinagar
+  { name: "Sindhu Bhavan Road", area: "Bodakdev / Thaltej", city: "Ahmedabad", state: "Gujarat", type: "Prime Corridor", tag: "Luxury Hub" },
+  { name: "SG Highway", area: "North-South Corridor", city: "Ahmedabad", state: "Gujarat", type: "Commercial & Res.", tag: "Major Artery" },
+  { name: "Iscon Ambli Road", area: "Ambli", city: "Ahmedabad", state: "Gujarat", type: "Ultra-Luxury Villas", tag: "High Appreciation" },
+  { name: "GIFT City", area: "IFSC Zone", city: "Gandhinagar", state: "Gujarat", type: "Global Financial Hub", tag: "SEZ & FinTech" },
+  { name: "Science City Road", area: "Sola", city: "Ahmedabad", state: "Gujarat", type: "Upscale Residential", tag: "Family Friendly" },
+  { name: "Bopal", area: "West Ahmedabad", city: "Ahmedabad", state: "Gujarat", type: "Residential Hub", tag: "Fast Growth" },
+  { name: "South Bopal (SoBo)", area: "South Bopal", city: "Ahmedabad", state: "Gujarat", type: "Modern Townships", tag: "High Demand" },
+  { name: "Prahlad Nagar", area: "Satellite", city: "Ahmedabad", state: "Gujarat", type: "Commercial & Retail", tag: "Prime Corporate" },
+  { name: "Bodakdev", area: "Judges Bungalow Road", city: "Ahmedabad", state: "Gujarat", type: "Elite Residential", tag: "Luxury Homes" },
+  { name: "Thaltej", area: "West Zone", city: "Ahmedabad", state: "Gujarat", type: "Green & Peaceful", tag: "Premium Living" },
+  { name: "Satellite", area: "Central-West", city: "Ahmedabad", state: "Gujarat", type: "Urban Center", tag: "Established" },
+  { name: "Vastrapur", area: "Near IIM / AlphaOne", city: "Ahmedabad", state: "Gujarat", type: "Central City Hub", tag: "High Demand" },
+  { name: "Navrangpura", area: "Central Ahmedabad", city: "Ahmedabad", state: "Gujarat", type: "Heritage & Business", tag: "Prime City" },
+  { name: "Naranpura", area: "Central-North", city: "Ahmedabad", state: "Gujarat", type: "Residential Area", tag: "Established" },
+  { name: "Nikol", area: "East Ahmedabad", city: "Ahmedabad", state: "Gujarat", type: "Emerging Corridor", tag: "Growth Potential" },
+  { name: "Vaishnodevi Circle", area: "North SG Highway", city: "Ahmedabad", state: "Gujarat", type: "New Launch Hotspot", tag: "Booming Corridor" },
+  { name: "Gota", area: "North Ahmedabad", city: "Ahmedabad", state: "Gujarat", type: "Modern Living", tag: "Well Connected" },
+  { name: "Shela", area: "Near Club O7", city: "Ahmedabad", state: "Gujarat", type: "High-Rise Living", tag: "Fast Growth" },
+  { name: "Shantigram", area: "Adani Township", city: "Ahmedabad", state: "Gujarat", type: "Integrated Township", tag: "Golf Living" },
+  { name: "Chandkheda", area: "Near Gandhinagar Link", city: "Ahmedabad", state: "Gujarat", type: "Twin City Corridor", tag: "Metro Connected" },
+  { name: "Kudasan & Randesan", area: "GIFT City Link", city: "Gandhinagar", state: "Gujarat", type: "High Growth Corridor", tag: "Modern Living" },
+
+  // Goa
+  { name: "Candolim", area: "North Goa Coast", city: "Goa", state: "Goa", type: "Beachside Luxury", tag: "Holiday Villas" },
+  { name: "Assagao", area: "Designer Village", city: "Goa", state: "Goa", type: "Heritage & Luxury", tag: "Boutique Living" },
+  { name: "Anjuna & Vagator", area: "North Goa", city: "Goa", state: "Goa", type: "Coastal Living", tag: "Vibrant Hub" },
+  { name: "Panaji (Panjim)", area: "Miramar / Dona Paula", city: "Panaji", state: "Goa", type: "Capital Waterfront", tag: "Scenic Sea Views" },
+
+  // Kolkata
+  { name: "New Town", area: "Action Area 1 / 2 / 3", city: "Kolkata", state: "West Bengal", type: "Planned Smart City", tag: "IT & Financial Hub" },
+  { name: "Salt Lake (Bidhannagar)", area: "Sector V IT Park", city: "Kolkata", state: "West Bengal", type: "IT Capital", tag: "Established" },
+  { name: "Alipore", area: "South Kolkata", city: "Kolkata", state: "West Bengal", type: "Aristocratic Elite", tag: "Heritage Luxury" },
+  { name: "Rajarhat", area: "Near City Centre 2", city: "Kolkata", state: "West Bengal", type: "Modern Corridors", tag: "Airport Link" },
+
+  // Chennai
+  { name: "OMR (Old Mahabalipuram Rd)", area: "Perungudi / Sholinganallur", city: "Chennai", state: "Tamil Nadu", type: "IT Expressway", tag: "Tech Belt" },
+  { name: "ECR (East Coast Road)", area: "Palavakkam / Neelankarai", city: "Chennai", state: "Tamil Nadu", type: "Beachside Luxury", tag: "Scenic Villas" },
+  { name: "Anna Nagar", area: "West / Shanti Colony", city: "Chennai", state: "Tamil Nadu", type: "Planned Urban Hub", tag: "Prestige Living" },
+  { name: "Adyar & Besant Nagar", area: "South Coast", city: "Chennai", state: "Tamil Nadu", type: "Coastal Heritage", tag: "Elite Residential" },
+
+  // Other Leading Indian Cities
+  { name: "Vesu", area: "VIP Road / Canal Corridor", city: "Surat", state: "Gujarat", type: "Diamond Capital Hub", tag: "Ultra Luxury" },
+  { name: "Alkapuri", area: "RC Dutt Road", city: "Vadodara", state: "Gujarat", type: "Royal City Center", tag: "Prime Commercial" },
+  { name: "C-Scheme", area: "Civil Lines / Ashok Nagar", city: "Jaipur", state: "Rajasthan", type: "Pink City Heritage", tag: "Royal Residences" },
+  { name: "Jagatpura", area: "Near Airport & Ring Road", city: "Jaipur", state: "Rajasthan", type: "Growth Corridor", tag: "High Demand" },
+  { name: "Gomti Nagar", area: "Vibhuti Khand / Shaheed Path", city: "Lucknow", state: "Uttar Pradesh", type: "Modern Planned City", tag: "IT & Commercial" },
+  { name: "Vijay Nagar", area: "AB Road / Scheme 54", city: "Indore", state: "Madhya Pradesh", type: "Commercial Spine", tag: "Fast Growing" },
+  { name: "Super Corridor", area: "Near Airport & TCS Campus", city: "Indore", state: "Madhya Pradesh", type: "Tech Expressway", tag: "Future Growth" },
+  { name: "Sector 17 & Mohali", area: "IT City / Aerocity", city: "Chandigarh", state: "Punjab", type: "Tricity IT Hub", tag: "Planned Living" },
+  { name: "Marine Drive", area: "Waterfront Boulevard", city: "Kochi", state: "Kerala", type: "Coastal Marine Views", tag: "Luxury Promenade" },
+  { name: "Kakkanad", area: "Infopark / SmartCity", city: "Kochi", state: "Kerala", type: "Cyber City Kerala", tag: "High Appreciation" },
+  { name: "Madhurawada", area: "Beach Road / IT SEZ", city: "Visakhapatnam", state: "Andhra Pradesh", type: "Coastal Smart City", tag: "Executive Capital" },
+  { name: "Infocity / Patia", area: "KIIT Square", city: "Bhubaneswar", state: "Odisha", type: "Eastern IT Capital", tag: "Smart City" },
+  { name: "Avinashi Road", area: "Peelamedu / Race Course", city: "Coimbatore", state: "Tamil Nadu", type: "Industrial & Textile", tag: "Prime City" },
+  { name: "Rajpur Road", area: "Mussoorie Foothills", city: "Dehradun", state: "Uttarakhand", type: "Scenic Luxury", tag: "Foothill Retreats" },
 ];
 
 const DYNAMIC_WORDS = [
@@ -463,10 +532,11 @@ export default function HeroSearch() {
         (loc) =>
           loc.name.toLowerCase().includes(query) ||
           loc.city.toLowerCase().includes(query) ||
+          (loc.state && loc.state.toLowerCase().includes(query)) ||
           (loc.area && loc.area.toLowerCase().includes(query)) ||
           (loc.tag && loc.tag.toLowerCase().includes(query))
       )
-    : ALL_LOCATIONS.slice(0, 8); // Top popular places when empty
+    : ALL_LOCATIONS.slice(0, 10); // Top popular places across India when empty
 
   function handleSearch(customSearch) {
     const s = typeof customSearch === "string" ? customSearch : search;
@@ -674,7 +744,7 @@ export default function HeroSearch() {
                           <span>
                             {search.trim()
                               ? `Places matching "${search}" (${filteredLocations.length})`
-                              : "Popular Localities (Ahmedabad & Gandhinagar)"}
+                              : "Popular Cities & Prime Localities Across India"}
                           </span>
                         </span>
                         <button
@@ -692,7 +762,7 @@ export default function HeroSearch() {
                         {filteredLocations.length > 0 ? (
                           filteredLocations.map((loc) => (
                             <button
-                              key={loc.name}
+                              key={`${loc.city}-${loc.name}`}
                               type="button"
                               onClick={() => {
                                 setSearch(loc.name);
@@ -711,6 +781,7 @@ export default function HeroSearch() {
                                   </p>
                                   <p className="text-[11px] text-slate-400 truncate">
                                     {highlightMatch(loc.area || loc.name, search)}, {highlightMatch(loc.city, search)}
+                                    {loc.state ? ` • ${highlightMatch(loc.state, search)}` : ""}
                                   </p>
                                 </div>
                               </div>
