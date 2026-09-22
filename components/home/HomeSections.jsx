@@ -87,7 +87,7 @@ export default function HomeSections() {
           {/* 3 Showcase Items: Wide Image | Middle Card | Right Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Left Wide Interior Image */}
-            <div className="lg:col-span-6 h-[320px] rounded-[24px] overflow-hidden bg-slate-100 shadow-xs relative">
+            <div className="lg:col-span-6 h-[336px] rounded-[24px] overflow-hidden bg-slate-100 shadow-xs relative">
               <img
                 src="/images/discover-interior-left.jpg"
                 alt="Modern Living Room Interior"
@@ -99,26 +99,26 @@ export default function HomeSections() {
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {/* Middle Feature Card */}
-                <div className="h-[320px] bg-[#f6f6f7] border border-slate-200/70 rounded-[20px] p-5 sm:p-6 flex flex-col justify-between items-center text-center shadow-2xs">
-                  <div className="my-auto flex flex-col items-center">
-                    <h3 className="text-[17px] font-bold text-slate-900 leading-snug">
+                <div className="h-[280px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] p-5 sm:p-6 flex flex-col justify-between items-center text-center shadow-2xs">
+                  <div className="pt-2 flex flex-col items-center">
+                    <h3 className="text-[17px] font-semibold text-slate-900 leading-snug">
                       Discover Properties<br />That Match Your Goals
                     </h3>
-                    <p className="mt-3 text-[12px] leading-relaxed text-slate-500 max-w-[190px]">
+                    <p className="mt-2.5 text-[11.5px] leading-relaxed text-slate-500 max-w-[200px]">
                       Explore curated opportunities across residential, investment, and future growth locations designed for confident decision-making.
                     </p>
                   </div>
 
                   <Link
                     href="/residential"
-                    className="mt-4 rounded-full bg-white text-slate-800 text-xs font-semibold px-6 py-2.5 shadow-xs border border-slate-200/80 hover:bg-slate-50 transition active:scale-95"
+                    className="mb-1 rounded-full bg-white text-slate-900 text-xs font-medium px-5 py-2 shadow-xs border border-slate-200/80 hover:bg-slate-50 transition active:scale-95"
                   >
                     Explore Projects
                   </Link>
                 </div>
 
                 {/* Right Feature Card with Image */}
-                <div className="h-[320px] bg-white border border-slate-200/70 rounded-[20px] overflow-hidden flex flex-col justify-between shadow-2xs">
+                <div className="h-[280px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] overflow-hidden flex flex-col justify-between shadow-2xs">
                   <div className="h-[155px] w-full overflow-hidden bg-slate-100 shrink-0">
                     <img
                       src="/images/discover-interior-right.jpg"
@@ -128,13 +128,13 @@ export default function HomeSections() {
                   </div>
 
                   <div className="p-4 flex flex-col items-center justify-between flex-1 text-center">
-                    <h4 className="text-[15px] font-bold text-slate-900 mt-1">
+                    <h4 className="text-[16px] font-semibold text-slate-900">
                       Pricing Start at $256K
                     </h4>
 
                     <Link
                       href="/residential"
-                      className="mt-3 w-full max-w-[170px] rounded-full bg-black text-white text-xs font-semibold py-2.5 px-5 hover:bg-slate-800 transition active:scale-95 shadow-sm text-center"
+                      className="mb-1 rounded-full bg-black text-white text-xs font-medium py-2 px-6 hover:bg-slate-800 transition active:scale-95 shadow-sm text-center"
                     >
                       Explore Properties
                     </Link>
@@ -143,8 +143,9 @@ export default function HomeSections() {
               </div>
 
               {/* Bottom Footnote under Middle & Right cards */}
-              <p className="mt-4 text-[13px] text-slate-600 font-normal leading-relaxed max-w-md">
-                Whether it&apos;s creating a cozy corner for relaxation or transforming a small area into a workspace
+              <p className="mt-4 text-[13px] text-slate-600 font-normal leading-relaxed max-w-[430px]">
+                Whether it&apos;s creating a cozy corner for relaxation or
+                <br className="hidden sm:inline" /> transforming a small area into a workspace
               </p>
             </div>
           </div>
