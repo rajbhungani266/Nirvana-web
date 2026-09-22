@@ -51,38 +51,108 @@ export default function HomeSections() {
   return (
     <section className="bg-white pt-8 pb-6 sm:pt-10 sm:pb-8">
       <div className="container-box">
-                {/* Discover Properties Stats Section (Matches Figma Image 1) */}
-        <div className="mb-16 grid gap-10 md:grid-cols-2 items-center">
-          <div className="max-w-xl">
-            <h2 className="heading-display text-3xl font-extrabold leading-tight tracking-[-0.03em] text-slate-900 md:text-4xl lg:text-[2.6rem]">
-              Discover Properties That Match Your Goals
-            </h2>
-            <p className="mt-4 text-[13px] sm:text-sm leading-relaxed text-slate-500">
-              Whether you are buying your first property, searching for investment opportunities, or exploring future growth locations, discover curated options designed to help you move faster and choose with confidence.
-            </p>
+        {/* Discover Properties Stats & Showcase Section (Matches Figma Image 1) */}
+        <div className="mb-20">
+          {/* Top Header Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-8 lg:gap-14 items-start mb-10">
+            <div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-[1.18] tracking-tight">
+                Discover Properties<br />That Match Your Goals
+              </h2>
+            </div>
             
-            <div className="mt-8 flex flex-col md:flex-row gap-6 md:gap-10">
-              <div>
-                <h3 className="text-3xl font-extrabold text-slate-900">500+</h3>
-                <p className="text-xs text-slate-500 mt-1">Verified Opportunities</p>
-              </div>
-              <div className="hidden md:block w-px bg-slate-200"></div>
-              <div>
-                <h3 className="text-3xl font-extrabold text-slate-900">50K+</h3>
-                <p className="text-xs text-slate-500 mt-1">Searches Every Month</p>
-              </div>
-              <div className="hidden md:block w-px bg-slate-200"></div>
-              <div>
-                <h3 className="text-3xl font-extrabold text-slate-900">10+ Years</h3>
-                <p className="text-xs text-slate-500 mt-1">Market Experience</p>
+            <div>
+              <p className="text-sm sm:text-[14.5px] leading-relaxed text-slate-500 font-normal">
+                Whether you are buying your first property, searching for investment opportunities, or exploring future growth locations, discover curated options designed to help you move faster and choose with confidence.
+              </p>
+              
+              {/* Stats */}
+              <div className="mt-8 flex flex-wrap items-start gap-8 sm:gap-12 lg:gap-16">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">500+</h3>
+                  <p className="text-xs sm:text-[13px] text-slate-500 mt-1 font-normal">Verified Opportunities</p>
+                </div>
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">50K+</h3>
+                  <p className="text-xs sm:text-[13px] text-slate-500 mt-1 font-normal">Searches Every Month</p>
+                </div>
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">10+ Years</h3>
+                  <p className="text-xs sm:text-[13px] text-slate-500 mt-1 font-normal">Market Experience</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="relative h-[240px] md:h-[340px] w-full overflow-hidden rounded-[24px]">
-            <img src="/images/eleventh.png" alt="Properties" className="h-full w-full object-cover" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80' }} />
+
+          {/* 3 Showcase Items: Wide Image | Middle Card | Right Card */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+            {/* Left Wide Interior Image */}
+            <div className="md:col-span-6 lg:col-span-6 min-h-[300px] md:min-h-[390px] rounded-2xl overflow-hidden bg-slate-100 shadow-xs relative">
+              <img
+                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80"
+                alt="Modern Living Room Interior"
+                className="h-full w-full object-cover"
+                onError={(e) => { e.target.src = '/images/third.png'; }}
+              />
+            </div>
+
+            {/* Middle Feature Card */}
+            <div className="md:col-span-3 lg:col-span-3 bg-[#f8f9fa] border border-slate-200/70 rounded-2xl p-6 sm:p-7 flex flex-col justify-between items-center text-center shadow-2xs min-h-[300px]">
+              <div className="my-auto flex flex-col items-center">
+                <h3 className="text-lg sm:text-[19px] font-bold text-slate-900 leading-snug">
+                  Discover Properties<br />That Match Your Goals
+                </h3>
+                <p className="mt-4 text-xs sm:text-[12.5px] leading-relaxed text-slate-500 max-w-[210px]">
+                  Explore curated opportunities across residential, investment, and future growth locations designed for confident decision-making.
+                </p>
+              </div>
+
+              <Link
+                href="/residential"
+                className="mt-6 rounded-full bg-white text-slate-800 text-xs sm:text-[13px] font-semibold px-6 py-2.5 shadow-xs border border-slate-200 hover:bg-slate-50 transition active:scale-95"
+              >
+                Explore Projects
+              </Link>
+            </div>
+
+            {/* Right Feature Card with Image */}
+            <div className="md:col-span-3 lg:col-span-3 bg-white border border-slate-200/80 rounded-2xl overflow-hidden flex flex-col justify-between shadow-2xs min-h-[300px]">
+              <div className="h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80"
+                  alt="Luxury Living Space"
+                  className="h-full w-full object-cover"
+                  onError={(e) => { e.target.src = '/images/hero-luxury.jpg'; }}
+                />
+              </div>
+
+              <div className="p-5 flex flex-col items-center justify-between flex-1 text-center">
+                <h4 className="text-base sm:text-[17px] font-bold text-slate-900 mt-1">
+                  Pricing Start at $256K
+                </h4>
+
+                <Link
+                  href="/residential"
+                  className="mt-4 w-full max-w-[190px] rounded-full bg-black text-white text-xs sm:text-[13px] font-semibold py-2.5 px-6 hover:bg-slate-800 transition active:scale-95 shadow-sm text-center"
+                >
+                  Explore Properties
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footnote under Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mt-4">
+            <div className="md:col-span-6 hidden md:block"></div>
+            <div className="md:col-span-6">
+              <p className="text-xs sm:text-[13px] text-slate-500 font-normal leading-relaxed">
+                Whether it&apos;s creating a cozy corner for relaxation or transforming a small area into a workspace
+              </p>
+            </div>
           </div>
         </div>
 
+        {/* Tailored Discovery Section */}
         <div className="mb-14 grid gap-8 xl:grid-cols-[1.5fr_1fr] items-end">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
