@@ -87,7 +87,7 @@ export default function HomeSections() {
           {/* 3 Showcase Items: Wide Image | Middle Card | Right Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Left Wide Interior Image */}
-            <div className="lg:col-span-6 h-[336px] rounded-[24px] overflow-hidden bg-slate-100 shadow-xs relative">
+            <div className="lg:col-span-6 h-[336px] xl:h-[352px] 2xl:h-[370px] rounded-[24px] overflow-hidden bg-slate-100 shadow-xs relative">
               <img
                 src="/images/discover-interior-left.jpg"
                 alt="Modern Living Room Interior"
@@ -99,7 +99,7 @@ export default function HomeSections() {
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 {/* Middle Feature Card */}
-                <div className="h-[280px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] p-5 sm:p-6 flex flex-col justify-between items-center text-center shadow-2xs">
+                <div className="h-[280px] xl:h-[295px] 2xl:h-[310px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] p-5 sm:p-6 flex flex-col justify-between items-center text-center shadow-2xs">
                   <div className="pt-2 flex flex-col items-center">
                     <h3 className="text-[17px] font-semibold text-slate-900 leading-snug">
                       Discover Properties<br />That Match Your Goals
@@ -118,8 +118,8 @@ export default function HomeSections() {
                 </div>
 
                 {/* Right Feature Card with Image */}
-                <div className="h-[280px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] overflow-hidden flex flex-col justify-between shadow-2xs">
-                  <div className="h-[155px] w-full overflow-hidden bg-slate-100 shrink-0">
+                <div className="h-[280px] xl:h-[295px] 2xl:h-[310px] bg-[#f5f5f5] border border-slate-200/70 rounded-[20px] overflow-hidden flex flex-col justify-between shadow-2xs">
+                  <div className="h-[155px] xl:h-[168px] 2xl:h-[178px] w-full overflow-hidden bg-slate-100 shrink-0">
                     <img
                       src="/images/discover-interior-right.jpg"
                       alt="Luxury Living Space"

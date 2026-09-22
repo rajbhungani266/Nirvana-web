@@ -189,8 +189,8 @@ export default function Navbar() {
         }`}
         ref={navRef}
       >
-        {/* Full-width container: Logo on far left, links in center, buttons on far right */}
-        <div className="flex h-[54px] sm:h-[62px] w-full items-center justify-between px-6 sm:px-10 lg:px-14">
+        {/* Universal responsive container: Aligns Logo, links and action buttons across all screen sizes */}
+        <div className="mx-auto flex h-[54px] sm:h-[62px] w-full max-w-[1520px] 2xl:max-w-[1620px] items-center justify-between px-5 sm:px-8 lg:px-10">
           {/* 1. Left: Official Brand Logo */}
           <div className="flex items-center shrink-0">
             <Link href="/" className="flex items-center group py-0.5">
@@ -268,7 +268,7 @@ export default function Navbar() {
             key={openMenu}
             className="panel-drop-animation absolute left-0 top-full z-50 w-full px-[4%] pt-2.5 pointer-events-auto"
           >
-            <div className="mx-auto max-w-[1480px]">
+            <div className="mx-auto max-w-[1520px] 2xl:max-w-[1620px]">
               <ActiveMegaMenu onClose={closeMenu} />
             </div>
           </div>

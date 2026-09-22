@@ -366,7 +366,7 @@ function ProjectListingPageInner({
       <section className="bg-gradient-to-b from-[#dce7f3] via-[#edf3f8] to-[#f8fafc] pb-2 pt-20 sm:pt-22">
         <Navbar />
 
-        <div className="w-[96%] max-w-[1340px] mx-auto pt-2 sm:pt-3">
+        <div className="container-box pt-2 sm:pt-3">
           {/* Header Row matching Image 1 */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="text-xl font-normal text-slate-700 md:text-2xl flex items-baseline gap-2 flex-wrap">
@@ -498,13 +498,13 @@ function ProjectListingPageInner({
       </section>
 
       {/* Listing Results Count Bar */}
-      <div className="w-[96%] max-w-[1340px] mx-auto pt-2 pb-2">
+      <div className="container-box pt-2 pb-2">
         <p className="text-xs sm:text-sm font-medium text-slate-500">
           Showing {count} {tab === "new" ? "new projects" : "owner properties"}
         </p>
       </div>
 
-      <section className="w-[96%] max-w-[1340px] mx-auto grid gap-6 pb-12 lg:grid-cols-[1fr_320px]">
+      <section className="container-box grid gap-6 pb-12 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_340px]">
         {/* Listings */}
         <div className="space-y-5">
           {loading && (

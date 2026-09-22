@@ -74,7 +74,7 @@ export default function ProjectCard({ property, category }) {
 
   return (
     <article className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300">
-      <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr_210px]">
+      <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr_210px] xl:grid-cols-[300px_1fr_225px]">
         {/* 1. Left: Main Image + Badges + Thumbnails */}
         <div
           className="relative h-64 md:h-auto min-h-[220px] overflow-hidden bg-slate-900"

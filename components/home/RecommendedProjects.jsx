@@ -60,7 +60,7 @@ const RECOMMENDED = [
 export default function RecommendedProjects() {
   return (
     <section className="bg-white py-12 sm:py-16">
-      <div className="container-box max-w-7xl mx-auto">
+      <div className="container-box">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">

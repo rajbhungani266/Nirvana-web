@@ -29,11 +29,11 @@ export default function LandingFeatureSections() {
   return (
     <section className="bg-[#f8fafc] text-slate-950">
       {/* 1. Explore Spaces Bento */}
-      <div className="container-box py-24">
-        <div className="grid gap-10 md:gap-14 lg:grid-cols-2 items-start max-w-4xl mx-auto">
+      <div className="container-box py-20 sm:py-24">
+        <div className="grid gap-10 md:gap-14 lg:grid-cols-2 items-start max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
           {/* Left Column */}
           <div className="flex flex-col gap-10 lg:gap-14">
-            <div className="max-w-md lg:pt-4">
+            <div className="max-w-lg lg:pt-4">
               <h2 className="heading-display text-3xl md:text-[38px] font-semibold text-slate-900 leading-[1.2] tracking-tight">
                 Explore Spaces Designed<br />for Better Living
               </h2>
@@ -42,7 +42,7 @@ export default function LandingFeatureSections() {
               </p>
             </div>
             
-            <div className="w-[90%] rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
+            <div className="w-full rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
               <img
                 src="/images/fourth.png"
                 alt="Modern interior detail"
@@ -52,7 +52,7 @@ export default function LandingFeatureSections() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col gap-6 md:gap-8 w-[95%]">
+          <div className="flex flex-col gap-6 md:gap-8 w-full">
             <div className="rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
               <img
                 src="/images/main.jpg"

@@ -251,7 +251,7 @@ export default function HeroSearch() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 pb-16 pt-20 md:pt-24 min-h-[580px] sm:min-h-[620px] flex flex-col justify-center">
+    <section className="relative overflow-hidden bg-slate-950 pb-16 pt-20 md:pt-24 min-h-[580px] sm:min-h-[620px] lg:min-h-[660px] xl:min-h-[700px] 2xl:min-h-[740px] flex flex-col justify-center">
       {/* 1. Ultra-Luxury Architectural Background with Smooth Slide Transitions */}
       <div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -301,7 +301,7 @@ export default function HeroSearch() {
       <div className="relative z-20">
         <div className="container-box text-center">
           {/* Main Animated Headline */}
-          <h1 className="hero-title mx-auto max-w-[900px] text-[28px] leading-[1.1] text-white sm:text-[40px] md:text-[50px] lg:text-[58px] drop-shadow-lg">
+          <h1 className="hero-title mx-auto max-w-[900px] xl:max-w-[1020px] text-[28px] leading-[1.1] text-white sm:text-[40px] md:text-[50px] lg:text-[58px] xl:text-[64px] drop-shadow-lg">
             Find{" "}
             <span
               className={`animate-shimmer inline-block bg-gradient-to-r from-[#e6c278] via-[#fce6a8] to-[#a98440] bg-clip-text text-transparent transition-all duration-300 ${
@@ -314,12 +314,12 @@ export default function HeroSearch() {
             Real Estate Opportunities
           </h1>
 
-          <p className="mt-2.5 sm:mt-3 mx-auto max-w-[680px] text-xs leading-relaxed text-white/85 sm:text-sm md:text-base drop-shadow">
+          <p className="mt-2.5 sm:mt-3 mx-auto max-w-[680px] xl:max-w-[740px] text-xs leading-relaxed text-white/85 sm:text-sm md:text-base drop-shadow">
             Explore curated luxury residences, flagship corporate offices, and emerging high-growth corridors with complete transparency.
           </p>
 
           {/* Search Box Container with Ambient Pulse Glow */}
-          <div className="relative mt-5 sm:mt-6 mx-auto w-full max-w-[980px] text-left">
+          <div className="relative mt-5 sm:mt-6 mx-auto w-full max-w-[980px] lg:max-w-[1040px] xl:max-w-[1100px] text-left">
             {/* Ambient Background Aura */}
             <div className="animate-pulse-ambient absolute -inset-3 -z-10 rounded-[36px] bg-gradient-to-r from-[#a98440]/25 via-[#fbbf24]/20 to-[#a98440]/25 blur-2xl" />
 

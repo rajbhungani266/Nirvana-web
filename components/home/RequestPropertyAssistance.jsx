@@ -81,7 +81,7 @@ export default function RequestPropertyAssistance() {
       {/* 2. Structured Lead Assistance Form */}
       <section className="bg-white py-8 md:py-10">
         <div className="container-box">
-          <div className="grid gap-5 lg:grid-cols-[1fr_1.05fr] items-stretch max-w-3xl mx-auto">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] xl:grid-cols-[1.1fr_1.2fr] items-stretch max-w-4xl xl:max-w-5xl mx-auto">
             <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-xl group">
               <img
                 src="/images/first.jpg"

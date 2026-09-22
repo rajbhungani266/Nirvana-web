@@ -35,8 +35,48 @@ body {
 }
 
 .container-box {
-  width: min(1200px, 92%);
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-box {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-box {
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-box {
+    max-width: 1420px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1680px) {
+  .container-box {
+    max-width: 1520px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 2000px) {
+  .container-box {
+    max-width: 1620px;
+  }
 }
 
 .bg-soft-blue {
