@@ -74,9 +74,16 @@ export default function RecommendedProjects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {RECOMMENDED.map((project, idx) => (
-            <Link href={`/${project.slug}`} key={idx} className="block group">
-              <div className="w-full relative transition-transform duration-300 group-hover:-translate-y-1">
+          {RECOMMENDED.map((project, idx) => {
+            const propertyHref = project.slug.startsWith("property/")
+              ? `/${project.slug}`
+              : project.slug.startsWith("/property/")
+              ? project.slug
+              : `/property/${project.slug.startsWith("/") ? project.slug.slice(1) : project.slug}`;
+
+            return (
+              <Link href={propertyHref} key={idx} className="block group">
+                <div className="w-full relative transition-transform duration-300 group-hover:-translate-y-1">
                 {/* Top Image */}
                 <div className="h-[210px] w-full overflow-hidden">
                   <img
@@ -117,7 +124,8 @@ export default function RecommendedProjects() {
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         {/* View All Button */}
