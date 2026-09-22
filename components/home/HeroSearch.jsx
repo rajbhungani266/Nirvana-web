@@ -268,7 +268,7 @@ function HeroPropertyTypeDropdown({
 
       {/* The Detailed Panel */}
       {isOpen && (
-        <div className="panel-drop-animation absolute left-0 top-[calc(100%+12px)] z-50 w-[300px] sm:w-[410px] rounded-2xl border border-slate-200/90 bg-white p-4 shadow-[0_20px_50px_rgba(15,23,42,0.2)] ring-1 ring-black/[0.05]">
+        <div className="panel-drop-animation absolute left-0 top-[calc(100%+12px)] z-50 w-[300px] sm:w-[410px] max-h-[min(480px,calc(100vh-220px))] overflow-y-auto rounded-2xl border border-slate-200/90 bg-white p-4 shadow-[0_20px_50px_rgba(15,23,42,0.2)] ring-1 ring-black/[0.05]">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
             <div>
@@ -476,7 +476,7 @@ export default function HeroSearch() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 pb-28 sm:pb-36 lg:pb-40 pt-20 md:pt-24 min-h-[600px] sm:min-h-[660px] lg:min-h-[700px] flex flex-col justify-center">
+    <section className="relative z-30 bg-slate-950 pb-28 sm:pb-36 lg:pb-40 pt-20 md:pt-24 min-h-[600px] sm:min-h-[660px] lg:min-h-[700px] flex flex-col justify-center">
       {/* 1. Ultra-Luxury Architectural Background with Smooth Slide Transitions */}
       <div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -511,8 +511,12 @@ export default function HeroSearch() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.12),transparent_70%)]" />
       </div>
 
-      {/* 2. Bottom Slide Info Badge */}
-      <div className="pointer-events-none absolute bottom-5 left-6 z-30 hidden sm:flex items-center gap-2 rounded-full border border-white/30 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs text-white shadow-xl">
+      {/* 2. Bottom Slide Info Badge - Lower z-index and hidden when dropdown is active */}
+      <div
+        className={`pointer-events-none absolute bottom-4 left-6 z-10 hidden sm:flex items-center gap-2 rounded-full border border-white/30 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs text-white shadow-xl transition-all duration-200 ${
+          isTypeDropdownOpen || isLocationOpen ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+        }`}
+      >
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
         <span className="font-bold text-amber-300">{HERO_SLIDES[currentSlide].tag}:</span>
         <span className="font-semibold text-white">{HERO_SLIDES[currentSlide].title}</span>
@@ -520,8 +524,8 @@ export default function HeroSearch() {
         <span className="text-white/80">{HERO_SLIDES[currentSlide].location}</span>
       </div>
 
-      {/* 3. Hero Content */}
-      <div className="relative z-20">
+      {/* 3. Hero Content - Higher z-index than background badge */}
+      <div className="relative z-30">
         <div className="container-box text-center">
           {/* Main Animated Headline */}
           <h1 className="hero-title mx-auto max-w-[900px] xl:max-w-[1020px] text-[28px] leading-[1.1] text-white sm:text-[40px] md:text-[50px] lg:text-[58px] xl:text-[64px] drop-shadow-lg">
@@ -662,7 +666,7 @@ export default function HeroSearch() {
 
                   {/* Location Suggestions Dropdown Panel */}
                   {isLocationOpen && (
-                    <div className="panel-drop-animation absolute left-0 right-0 sm:-left-3 sm:-right-3 top-[calc(100%+12px)] z-50 rounded-2xl border border-slate-200/90 bg-white p-2.5 shadow-[0_25px_60px_rgba(15,23,42,0.22)] ring-1 ring-black/[0.05] max-h-[350px] overflow-y-auto">
+                    <div className="panel-drop-animation absolute left-0 right-0 sm:-left-3 sm:-right-3 top-[calc(100%+12px)] z-50 rounded-2xl border border-slate-200/90 bg-white p-2.5 shadow-[0_25px_60px_rgba(15,23,42,0.22)] ring-1 ring-black/[0.05] max-h-[290px] overflow-y-auto">
                       {/* Dropdown Header */}
                       <div className="flex items-center justify-between px-2.5 py-1.5 border-b border-slate-100 text-[11px]">
                         <span className="font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
