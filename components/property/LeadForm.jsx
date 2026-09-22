@@ -47,16 +47,9 @@ export default function LeadForm({ propertyCategory = "", propertyId = null }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 rounded-xl border border-slate-100 bg-white p-3 shadow-sm"
+      className="flex flex-col gap-3"
     >
-      <div className="rounded-lg bg-[#a98440] p-3 text-white">
-        <h3 className="text-sm font-bold">Schedule Your Free Site Visit</h3>
-        <p className="mt-0.5 text-[11px] leading-tight text-white/90">
-          Share your details and our advisor will connect with you.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-2.5 mt-1">
+      <div className="flex flex-col gap-2.5">
         <input
           name="name"
           value={form.name}

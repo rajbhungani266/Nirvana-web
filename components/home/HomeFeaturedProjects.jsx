@@ -5,6 +5,7 @@ import Link from "next/link";
 import { fetchHomeFeaturedProperties } from "@/lib/api";
 import { getImageUrl } from "@/lib/format";
 import EnquireModal from "@/components/property/EnquireModal";
+import AmenitiesModal from "@/components/property/AmenitiesModal";
 
 function displayPrice(value) {
   if (!value) return "Price on Request";
@@ -101,9 +102,24 @@ const fallbackProjects = [
     badge: "High ROI",
     possession: "Dec 2026",
   },
+  {
+    id: 6,
+    title: "The Grandeur Heights",
+    city: "Ahmedabad",
+    area: "Science City Road, Sola",
+    price: "16500000",
+    area_sqft: "2400",
+    slug: "the-grandeur",
+    frontend_category: "residential",
+    main_image: "/images/first.jpg",
+    property_type: "3 & 4 BHK High-Rise",
+    builder: "Grandeur Spaces",
+    badge: "High ROI",
+    possession: "Mid 2026",
+  },
 ];
 
-function ProjectCard({ project, onEnquire }) {
+function ProjectCard({ project, onEnquire, onShowAmenities }) {
   const category = project.frontend_category || "residential";
   const propertyType = project.property_type || "4 BHK Ultra-Lux";
   const areaSqft = project.area_sqft
@@ -184,13 +200,24 @@ function ProjectCard({ project, onEnquire }) {
               <span className="truncate">{possession}</span>
             </div>
 
-            {/* Grade A Builder */}
-            <div className="flex items-center gap-2 truncate">
-              <svg className="h-4 w-4 text-[#b88c3a] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            {/* Amenities - Clickable with popup */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onShowAmenities) onShowAmenities(project);
+              }}
+              className="flex items-center gap-2 truncate text-left group/amenities cursor-pointer hover:text-[#a98440] transition-colors"
+              title="Click to view all amenities"
+            >
+              <svg className="h-4 w-4 text-[#b88c3a] shrink-0 transition-transform group-hover/amenities:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
-              <span className="truncate">Grade A Builder</span>
-            </div>
+              <span className="truncate underline decoration-dotted decoration-slate-400 underline-offset-2 group-hover/amenities:decoration-[#a98440]">
+                Amenities
+              </span>
+            </button>
           </div>
         </div>
 
@@ -218,6 +245,7 @@ function ProjectCard({ project, onEnquire }) {
 export default function HomeFeaturedProjects() {
   const [projects, setProjects] = useState(fallbackProjects);
   const [enquiryProject, setEnquiryProject] = useState(null);
+  const [amenitiesProject, setAmenitiesProject] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const scrollRef = useRef(null);
   const [mobileIndex, setMobileIndex] = useState(0);
@@ -229,13 +257,13 @@ export default function HomeFeaturedProjects() {
     return () => clearInterval(interval);
   }, [projects.length]);
 
-  const totalPages = Math.ceil(projects.length / 4) || 1;
+  const totalPages = Math.ceil(projects.length / 3) || 1;
 
   useEffect(() => {
     async function loadProjects() {
       try {
         const data = await fetchHomeFeaturedProperties();
-        if (data && data.length >= 4) {
+        if (data && data.length >= 3) {
           setProjects(data);
         }
       } catch {
@@ -282,7 +310,8 @@ export default function HomeFeaturedProjects() {
       return;
     }
 
-    const step = clientWidth;
+    const gap = typeof window !== "undefined" && window.innerWidth >= 1024 ? 20 : 16;
+    const step = clientWidth + gap;
 
     let targetLeft = direction === "left" ? scrollLeft - step : scrollLeft + step;
 
@@ -352,7 +381,11 @@ export default function HomeFeaturedProjects() {
                 const category = project.frontend_category || "residential";
                 return (
                   <div key={`mob-${category}-${project.id || idx}`} className="w-full flex-shrink-0 px-2">
-                    <ProjectCard project={project} onEnquire={setEnquiryProject} />
+                    <ProjectCard
+                      project={project}
+                      onEnquire={setEnquiryProject}
+                      onShowAmenities={setAmenitiesProject}
+                    />
                   </div>
                 );
               })}
@@ -394,9 +427,13 @@ export default function HomeFeaturedProjects() {
             return (
               <div
                 key={`desk-${category}-${project.id || idx}`}
-                className="flex-none w-full sm:w-[calc(50%-10px)] hidden sm:block lg:w-[calc(25%-15px)]"
+                className="flex-none w-full sm:w-[calc(50%-10px)] hidden sm:block lg:w-[calc((100%-40px)/3)]"
               >
-                <ProjectCard project={project} onEnquire={setEnquiryProject} />
+                <ProjectCard
+                  project={project}
+                  onEnquire={setEnquiryProject}
+                  onShowAmenities={setAmenitiesProject}
+                />
               </div>
             );
           })}
@@ -455,6 +492,20 @@ export default function HomeFeaturedProjects() {
           property={enquiryProject}
           category={enquiryProject.category}
           onClose={() => setEnquiryProject(null)}
+        />
+      )}
+
+      {amenitiesProject && (
+        <AmenitiesModal
+          project={amenitiesProject}
+          onClose={() => setAmenitiesProject(null)}
+          onEnquire={(proj) => {
+            setAmenitiesProject(null);
+            setEnquiryProject({
+              ...proj,
+              category: proj.frontend_category || "residential",
+            });
+          }}
         />
       )}
     </section>

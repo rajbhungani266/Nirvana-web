@@ -29,43 +29,44 @@ export default function HomePage() {
       <RecommendedProjects />
 
       {/* High Impact Conversion CTA Section */}
-      <section className="relative overflow-hidden bg-slate-950 py-24 text-center text-white">
+      <section className="relative overflow-hidden bg-slate-900 py-24 text-center text-white">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-35"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: "url('/images/tenth.png')",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(169,132,64,0.3),transparent_70%)]" />
+        <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
         <div className="container-box relative z-10">
-          <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#e2b764] backdrop-blur-md">
-            Direct Owner & Buyer Desk
-          </span>
-
-          <h2 className="heading-display mx-auto mt-5 max-w-3xl text-3xl font-extrabold leading-tight text-white md:text-5xl">
-            Whether you&apos;re searching for the right home or planning to list, our team is with you.
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
-            Join over 1,200 satisfied property owners, developers, and NRI investors making secure, transparent real estate decisions in Ahmedabad.
+          <p className="text-sm font-medium text-slate-300">
+            Looking to Buy or Sell Property?
           </p>
 
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
+          <h2 className="heading-display mx-auto mt-4 max-w-4xl text-2xl font-medium leading-snug text-white sm:text-3xl md:text-4xl">
+            Whether you&apos;re searching for the right opportunity or planning to list your property, our team can help you move with confidence.
+          </h2>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               href="/post-property"
-              className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-8 py-3.5 text-sm font-bold text-white shadow-lg transition active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#a98440] hover:bg-[#977232] px-6 py-3 text-sm font-bold text-white shadow-lg transition active:scale-95"
             >
-              Post Your Property Free
+              Submit Property
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 7l-10 10M17 7H8M17 7v9" />
+              </svg>
             </Link>
 
             <Link
               href="/residential"
-              className="rounded-xl border border-slate-300 bg-white px-8 py-3.5 text-sm font-bold text-slate-950 shadow-md transition hover:bg-slate-100 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-950 shadow-md transition hover:bg-slate-100 active:scale-95"
             >
-              Browse All Properties
+              Browse Properties
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 7l-10 10M17 7H8M17 7v9" />
+              </svg>
             </Link>
           </div>
         </div>

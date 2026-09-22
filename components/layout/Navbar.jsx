@@ -70,12 +70,13 @@ export default function Navbar() {
       if (currentScrollY <= 50) {
         setIsVisible(true);
       } else {
-        // Scrolling UP
-        if (currentScrollY < lastScrollY) {
+        const delta = currentScrollY - lastScrollY;
+        // Scrolling UP with threshold
+        if (delta < -5) {
           setIsVisible(true);
         } 
-        // Scrolling DOWN
-        else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling DOWN with threshold
+        else if (delta > 5 && currentScrollY > 100) {
           setIsVisible(false);
           setOpenMenu(null);
         }
@@ -265,7 +266,7 @@ export default function Navbar() {
             key={openMenu}
             className="panel-drop-animation absolute left-0 top-full z-50 w-full px-[4%] pt-2.5 pointer-events-auto"
           >
-            <div className="mx-auto max-w-[1240px]">
+            <div className="mx-auto max-w-[1480px]">
               <ActiveMegaMenu onClose={closeMenu} />
             </div>
           </div>
@@ -303,26 +304,26 @@ export default function Navbar() {
                 {mobileAccordion === 'Residential' && (
                   <div className="border-t border-slate-100 bg-white px-5 py-4">
                     <ul className="space-y-4 text-[13px] font-medium text-slate-600">
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Apartments / Flats</li>
-                      <li className="flex items-center gap-3"><Home className="h-4 w-4 text-slate-500" fill="currentColor" /> Independent House</li>
-                      <li className="flex items-center gap-3"><Home className="h-4 w-4 text-slate-500" fill="currentColor" /> Villas & Penthouses</li>
-                      <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Residential Plots</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Builder Floors</li>
-                      <li className="flex items-center gap-3"><svg className="h-4 w-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Gated Communities</li>
+                      <li><Link href="/residential?property_type=flat" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Apartments / Flats</Link></li>
+                      <li><Link href="/residential?property_type=bungalow" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Home className="h-4 w-4 text-slate-500" fill="currentColor" /> Independent House</Link></li>
+                      <li><Link href="/residential?property_type=villa" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Home className="h-4 w-4 text-slate-500" fill="currentColor" /> Villas & Penthouses</Link></li>
+                      <li><Link href="/plot-weekend-villa?property_type=plot" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Residential Plots</Link></li>
+                      <li><Link href="/residential" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Builder Floors</Link></li>
+                      <li><Link href="/residential" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><svg className="h-4 w-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Gated Communities</Link></li>
                       
                       <li className="pt-4 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">BY BHK</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 1 BHK Apartments</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 2 BHK Apartments</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 3 BHK Apartments</li>
-                      <li className="flex items-center gap-3"><svg className="h-4 w-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 4+ BHK Luxury Homes</li>
+                      <li><Link href="/residential?bedrooms=1" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 1 BHK Apartments</Link></li>
+                      <li><Link href="/residential?bedrooms=2" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 2 BHK Apartments</Link></li>
+                      <li><Link href="/residential?bedrooms=3" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> 3 BHK Apartments</Link></li>
+                      <li><Link href="/residential?bedrooms__gte=4" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><svg className="h-4 w-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 4+ BHK Luxury Homes</Link></li>
                       
-                      <li className="pt-4"><Link href="/residential" className="font-bold text-[#0284c7] hover:underline">View all Residential &rarr;</Link></li>
+                      <li className="pt-4"><Link href="/residential" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-[#0284c7] hover:underline">View all Residential &rarr;</Link></li>
                     </ul>
                   </div>
                 )}
               </div>
 
-                            {/* Commercial Accordion */}
+              {/* Commercial Accordion */}
               <div className="rounded-xl border border-slate-100 bg-white overflow-hidden shadow-sm">
                 <button onClick={() => setMobileAccordion(mobileAccordion === 'Commercial' ? '' : 'Commercial')} className="flex w-full items-center justify-between p-4 font-bold text-slate-800">
                   <div className="flex items-center gap-3">
@@ -334,11 +335,11 @@ export default function Navbar() {
                 {mobileAccordion === 'Commercial' && (
                   <div className="border-t border-slate-100 bg-white px-5 py-4">
                     <ul className="space-y-4 text-[13px] font-medium text-slate-600">
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Office Spaces</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Retail Shops</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Showrooms</li>
-                      <li className="flex items-center gap-3"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Co-working Spaces</li>
-                      <li className="pt-4"><Link href="/commercial" className="font-bold text-[#0284c7] hover:underline">View all Commercial &rarr;</Link></li>
+                      <li><Link href="/commercial?commercial_type=office" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Office Spaces</Link></li>
+                      <li><Link href="/commercial?commercial_type=shop" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Retail Shops</Link></li>
+                      <li><Link href="/commercial?commercial_type=showroom" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Showrooms</Link></li>
+                      <li><Link href="/commercial" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><Square className="h-4 w-4 text-slate-500" fill="currentColor" /> Co-working Spaces</Link></li>
+                      <li className="pt-4"><Link href="/commercial" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-[#0284c7] hover:underline">View all Commercial &rarr;</Link></li>
                     </ul>
                   </div>
                 )}
@@ -356,10 +357,10 @@ export default function Navbar() {
                 {mobileAccordion === 'Investment' && (
                   <div className="border-t border-slate-100 bg-white px-5 py-4">
                     <ul className="space-y-4 text-[13px] font-medium text-slate-600">
-                      <li className="flex items-center gap-3"><TrendingUp className="h-4 w-4 text-slate-500" /> Pre-leased Properties</li>
-                      <li className="flex items-center gap-3"><TrendingUp className="h-4 w-4 text-slate-500" /> Fractional Ownership</li>
-                      <li className="flex items-center gap-3"><TrendingUp className="h-4 w-4 text-slate-500" /> High ROI Assets</li>
-                      <li className="pt-4"><Link href="/investment" className="font-bold text-[#0284c7] hover:underline">View all Investment &rarr;</Link></li>
+                      <li><Link href="/investment?investment_type=preleased" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><TrendingUp className="h-4 w-4 text-slate-500" /> Pre-leased Properties</Link></li>
+                      <li><Link href="/investment" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><TrendingUp className="h-4 w-4 text-slate-500" /> Fractional Ownership</Link></li>
+                      <li><Link href="/investment?investment_type=high_return" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><TrendingUp className="h-4 w-4 text-slate-500" /> High ROI Assets</Link></li>
+                      <li className="pt-4"><Link href="/investment" onClick={() => setIsMobileMenuOpen(false)} className="font-bold text-[#0284c7] hover:underline">View all Investment &rarr;</Link></li>
                     </ul>
                   </div>
                 )}
@@ -377,16 +378,16 @@ export default function Navbar() {
                 {mobileAccordion === 'Locations' && (
                   <div className="border-t border-slate-100 bg-white px-5 py-4">
                     <ul className="space-y-4 text-[13px] font-medium text-slate-600">
-                      <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> SG Highway</li>
-                      <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Sindhu Bhavan Road</li>
-                      <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Science City</li>
-                      <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Gift City</li>
+                      <li><Link href="/residential?area__iexact=SG Highway" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> SG Highway</Link></li>
+                      <li><Link href="/residential?area__iexact=Sindhi Bhavan Road" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Sindhu Bhavan Road</Link></li>
+                      <li><Link href="/residential?area__iexact=Science City" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Science City</Link></li>
+                      <li><Link href="/gift-city" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 hover:text-[#a98440] transition"><MapPin className="h-4 w-4 text-slate-500" fill="currentColor" /> Gift City</Link></li>
                     </ul>
                   </div>
                 )}
               </div>
 
-{/* Promotional Card - Matches Figma */}
+              {/* Promotional Card - Matches Figma */}
               <div className="mt-6 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
                 <span className="inline-block rounded bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700 mb-3">
                   ★ FEATURED OPPORTUNITY
@@ -428,19 +429,27 @@ export default function Navbar() {
                   </div>
                 </div>
                 
-                <button className="mt-4 w-full rounded-lg bg-[#0f172a] py-2.5 text-xs font-bold text-white transition hover:bg-slate-800">
+                <Link
+                  href="/commercial"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="mt-4 flex w-full items-center justify-center rounded-lg bg-[#0f172a] py-2.5 text-xs font-bold text-white transition hover:bg-slate-800"
+                >
                   View Project Details
-                </button>
+                </Link>
               </div>
 
               {/* Requirement Card */}
               <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <h4 className="text-sm font-bold text-slate-900">Looking for something specific?</h4>
                 <p className="mt-1 text-[11px] text-slate-500">Post your requirement and we'll help you find the best.</p>
-                <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-[#0284c7] bg-white py-2 text-xs font-bold text-[#0284c7] hover:bg-blue-50">
+                <Link
+                  href="/post-property"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-[#0284c7] bg-white py-2 text-xs font-bold text-[#0284c7] hover:bg-blue-50"
+                >
                   <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   Post Requirement
-                </button>
+                </Link>
               </div>
 
               {/* Trust Badges Footer */}

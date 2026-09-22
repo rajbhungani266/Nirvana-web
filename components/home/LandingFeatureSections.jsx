@@ -30,56 +30,43 @@ export default function LandingFeatureSections() {
     <section className="bg-[#f8fafc] text-slate-950">
       {/* 1. Explore Spaces Bento */}
       <div className="container-box py-24">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
-          <div className="max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#a98440]">
-              Architectural Excellence
-            </span>
-            <h2 className="heading-display mt-4 text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl">
-              Explore Spaces Designed
-              <br />
-              for Elevated Living
-            </h2>
-            <p className="mt-6 text-sm leading-relaxed text-slate-600 sm:text-base">
-              Discover thoughtfully engineered residences, boutique communities, and future-proof commercial spaces that synthesize aesthetics, connectivity, and lasting capital appreciation across Ahmedabad.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 border border-slate-200 shadow-sm">
-                <span className="text-emerald-600 font-bold">✓</span>
-                <span className="text-xs font-bold text-slate-800">100% Title Clear RERA</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 border border-slate-200 shadow-sm">
-                <span className="text-emerald-600 font-bold">✓</span>
-                <span className="text-xs font-bold text-slate-800">Zero Hidden Brokerage</span>
-              </div>
+        <div className="grid gap-10 md:gap-14 lg:grid-cols-2 items-start max-w-4xl mx-auto">
+          {/* Left Column */}
+          <div className="flex flex-col gap-10 lg:gap-14">
+            <div className="max-w-md lg:pt-4">
+              <h2 className="heading-display text-3xl md:text-[38px] font-semibold text-slate-900 leading-[1.2] tracking-tight">
+                Explore Spaces Designed<br />for Better Living
+              </h2>
+              <p className="mt-5 text-[13px] md:text-[14px] leading-relaxed text-slate-500">
+                Discover thoughtfully selected homes, premium communities, and future-ready developments that combine lifestyle, convenience, and long-term value for modern buyers and investors.
+              </p>
+            </div>
+            
+            <div className="w-[90%] rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
+              <img
+                src="/images/fourth.png"
+                alt="Modern interior detail"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-105"
+              />
             </div>
           </div>
 
-          <div className="grid gap-6">
-            <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-xl group">
+          {/* Right Column */}
+          <div className="flex flex-col gap-6 md:gap-8 w-[95%]">
+            <div className="rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
               <img
                 src="/images/main.jpg"
                 alt="Living room architecture"
-                className="h-[400px] w-full object-cover transition duration-700 group-hover:scale-105"
+                className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="overflow-hidden rounded-[26px] border border-slate-200 bg-white shadow-lg group">
-                <img
-                  src="/images/fourth.png"
-                  alt="Modern interior detail"
-                  className="h-[240px] w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="overflow-hidden rounded-[26px] border border-slate-200 bg-white shadow-lg group">
-                <img
-                  src="/images/fifth.png"
-                  alt="Contemporary living"
-                  className="h-[240px] w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
+            
+            <div className="rounded-[20px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
+              <img
+                src="/images/fifth.png"
+                alt="Contemporary living"
+                className="w-full aspect-[16/9] object-cover transition-transform duration-700 hover:scale-105"
+              />
             </div>
           </div>
         </div>
@@ -170,7 +157,7 @@ export default function LandingFeatureSections() {
             {TESTIMONIALS.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-between rounded-[26px] border border-slate-200 bg-slate-50/60 p-6 transition hover:bg-white hover:shadow-lg"
+                className="flex flex-col justify-between p-4"
               >
                 <div>
                   <div className="flex text-amber-400 text-sm mb-3">

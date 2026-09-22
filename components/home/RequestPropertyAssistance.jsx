@@ -15,9 +15,6 @@ export default function RequestPropertyAssistance() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Quick callback state
-  const [callbackPhone, setCallbackPhone] = useState("");
-  const [callbackDone, setCallbackDone] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
@@ -41,53 +38,41 @@ export default function RequestPropertyAssistance() {
   return (
     <>
       {/* 1. Sell Property With Confidence Banner */}
-      <section className="relative overflow-hidden bg-slate-950 py-24 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(11,118,209,0.18),transparent_50%)]" />
-        <div className="container-box relative z-10">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-            <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-[0.28em] text-[#3ba2f8]">
-                Owner & Developer Services
-              </span>
-              <h2 className="heading-display mt-4 text-4xl font-extrabold leading-tight tracking-[-0.03em] text-white sm:text-5xl">
-                Sell or Monetize Your Property
-                <br />
-                With Absolute Confidence
+      
+      {/* 1. Sell / Monetize Banner */}
+      <section className="bg-white py-12 md:py-16">
+        <div className="container-box">
+          <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] bg-slate-900 w-full min-h-[340px] sm:min-h-[400px] flex items-center shadow-xl group">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <img
+                src="/images/type-villa.jpg"
+                alt="Luxury Property"
+                className="h-full w-full object-cover object-center transition duration-1000 group-hover:scale-105"
+              />
+            </div>
+            
+            {/* Gradient Overlay matching Figma: Dark fade from left */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0f141f] via-[#0f141f]/90 to-transparent w-[95%] sm:w-[75%]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f141f]/70 to-transparent sm:hidden" />
+            
+            {/* Content Container */}
+            <div className="relative z-10 w-full max-w-2xl px-6 py-12 sm:px-12 md:px-16 lg:py-16">
+              <h2 className="heading-display text-3xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-4xl lg:text-[42px]">
+                Sell Your Property With Confidence
               </h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
-                Receive certified market valuations, curated high-net-worth investor exposure, and end-to-end legal title coordination across Ahmedabad.
+              <p className="mt-3 sm:mt-5 max-w-lg text-[13px] sm:text-[15px] leading-relaxed text-slate-300 font-medium">
+                Get expert support, market-backed pricing guidance, and qualified buyer interest for your property.
               </p>
 
-              {callbackDone ? (
-                <div className="mt-8 inline-block rounded-2xl bg-emerald-500/20 border border-emerald-400/30 px-6 py-2.5 text-sm font-semibold text-emerald-300">
-                  ✓ Callback request received! Our valuation manager will connect within 30 minutes.
-                </div>
-              ) : (
-                <form onSubmit={handleCallback} className="mt-8 flex flex-col gap-3 sm:flex-row max-w-md">
-                  <input
-                    type="tel"
-                    placeholder="Enter phone for free appraisal"
-                    value={callbackPhone}
-                    onChange={(e) => setCallbackPhone(e.target.value)}
-                    required
-                    className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white placeholder-white/50 outline-none backdrop-blur-md focus:border-[#a98440]"
-                  />
-                  <button
-                    type="submit"
-                    className="rounded-xl bg-[#a98440] hover:bg-[#977232] px-7 py-2.5 text-sm font-bold text-white shadow-md transition active:scale-95 cursor-pointer"
-                  >
-                    Request Callback
-                  </button>
-                </form>
-              )}
-            </div>
-
-            <div className="overflow-hidden rounded-[32px] border border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.4)] group">
-              <img
-                src="/images/ninth.png"
-                alt="Luxury Architecture Presentation"
-                className="h-[420px] w-full object-cover transition duration-700 group-hover:scale-105"
-              />
+              <div className="mt-8 sm:mt-10">
+                <button
+                  type="button"
+                  className="rounded-lg border border-white bg-transparent px-8 py-3 text-[13px] sm:text-sm font-semibold tracking-wide text-white transition hover:bg-white hover:text-slate-900 active:scale-95 cursor-pointer"
+                >
+                  Request a Callback
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const DEAL_MODES = [
@@ -127,6 +127,80 @@ function resolveDestination({ dealMode, categoryTab, propertyType, search }) {
 
   const qs = params.toString();
   return qs ? `${path}?${qs}` : path;
+}
+
+function HeroPropertyTypeDropdown({ value, onChange, options = [] }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
+    }
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const activeOption = options.find((opt) => opt.value === value);
+  const displayLabel = activeOption?.label || options[0]?.label || "All Residential";
+
+  return (
+    <div ref={ref} className="relative flex items-center shrink-0">
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex items-center gap-1.5 py-2 pl-2 pr-3 text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#a98440] transition-colors cursor-pointer outline-none select-none"
+      >
+        <span className="whitespace-nowrap">{displayLabel}</span>
+        <svg
+          className={`h-3.5 w-3.5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#a98440]" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="panel-drop-animation absolute left-0 top-[calc(100%+8px)] z-50 min-w-[190px] rounded-2xl border border-slate-200/90 bg-white p-1.5 shadow-[0_16px_36px_rgba(15,23,42,0.12)]">
+          <div className="space-y-0.5">
+            {options.map((opt) => {
+              const active = opt.value === value;
+              return (
+                <button
+                  key={opt.value || "all"}
+                  type="button"
+                  onClick={() => {
+                    onChange(opt.value);
+                    setIsOpen(false);
+                  }}
+                  className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
+                    active
+                      ? "bg-[#a98440]/10 font-bold text-[#a98440]"
+                      : "text-slate-700 hover:bg-slate-100/80 hover:text-slate-950 font-medium"
+                  }`}
+                >
+                  <span>{opt.label}</span>
+                  {active && (
+                    <svg className="h-3.5 w-3.5 text-[#a98440] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function HeroSearch() {
@@ -298,19 +372,11 @@ export default function HeroSearch() {
               {/* Main Search Input Line (Matches Image 3) */}
               <div className="flex flex-col gap-2.5 md:flex-row md:items-center">
                 {/* Left Dropdown: Dynamic options per deal mode */}
-                <div className="flex items-center gap-1 shrink-0">
-                  <select
-                    value={propertyType}
-                    onChange={(e) => setPropertyType(e.target.value)}
-                    className="bg-transparent py-2 pl-2 pr-4 text-xs sm:text-sm font-semibold text-slate-800 outline-none cursor-pointer"
-                  >
-                    {(PROPERTY_TYPE_BY_MODE[dealMode] || PROPERTY_TYPE_BY_MODE.buy).map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <HeroPropertyTypeDropdown
+                  value={propertyType}
+                  onChange={setPropertyType}
+                  options={PROPERTY_TYPE_BY_MODE[dealMode] || PROPERTY_TYPE_BY_MODE.buy}
+                />
 
                 {/* Divider Line */}
                 <div className="hidden md:block h-7 w-[1px] bg-slate-200 shrink-0" />

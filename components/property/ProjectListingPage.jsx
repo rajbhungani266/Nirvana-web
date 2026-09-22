@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { fetchProperties } from "@/lib/api";
 import ProjectCard from "./ProjectCard";
@@ -113,6 +113,88 @@ const BHK_OPTIONS = [
   { value: "3", label: "3 BHK" },
   { value: "4", label: "4+ BHK" },
 ];
+
+const CITY_OPTIONS = [
+  { value: "Ahmedabad", label: "Ahmedabad" },
+  { value: "Gandhinagar", label: "Gandhinagar" },
+  { value: "GIFT City", label: "GIFT City" },
+];
+
+function CityDropdown({ city, setCity }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
+    }
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const activeLabel = city || "Ahmedabad";
+
+  return (
+    <div ref={ref} className="relative flex items-center">
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex items-center gap-1.5 text-xs font-normal text-slate-700 outline-none cursor-pointer pr-1 select-none"
+      >
+        <span>{activeLabel}</span>
+        <svg
+          className={`h-3 w-3 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#a98440]" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="panel-drop-animation absolute left-0 top-[calc(100%+10px)] z-50 min-w-[140px] rounded-2xl border border-slate-200/90 bg-white p-1.5 shadow-[0_16px_36px_rgba(15,23,42,0.12)]">
+          <div className="px-2.5 pt-1 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1">
+            City
+          </div>
+          <div className="space-y-0.5">
+            {CITY_OPTIONS.map((c) => {
+              const active = (city || "Ahmedabad") === c.value;
+              return (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => {
+                    setCity(c.value);
+                    setIsOpen(false);
+                  }}
+                  className={`flex w-full items-center justify-between rounded-xl px-2.5 py-1.5 text-left text-xs transition-colors cursor-pointer ${
+                    active
+                      ? "bg-[#a98440]/10 font-bold text-[#a98440]"
+                      : "text-slate-700 hover:bg-slate-100/80 hover:text-slate-900 font-normal"
+                  }`}
+                >
+                  <span>{c.label}</span>
+                  {active && (
+                    <svg className="h-3.5 w-3.5 text-[#a98440] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /**
  * @param {{
@@ -324,30 +406,11 @@ function ProjectListingPageInner({
           {/* Filter pills matching Image 1 - single horizontal row with preserved Search button */}
           <form
             onSubmit={handleSearch}
-            className="mt-3 flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide py-1 w-full flex-nowrap pr-4 sm:pr-6"
+            className="mt-3 flex items-center gap-1.5 sm:gap-2 overflow-x-auto lg:overflow-visible scrollbar-hide py-1 w-full flex-nowrap lg:flex-wrap pr-4 sm:pr-6 relative z-30"
           >
             {/* Combined City + Search Location Capsule */}
             <div className="flex h-9 shrink-0 items-center rounded-full border border-slate-200/90 bg-white px-3 shadow-xs hover:border-slate-300 transition-colors">
-              <div className="relative flex items-center">
-                <select
-                  value={city}
-                  onChange={(event) => setCity(event.target.value)}
-                  className="appearance-none bg-transparent pr-4 text-xs font-normal text-slate-700 outline-none cursor-pointer"
-                >
-                  <option value="">Ahmedabad</option>
-                  <option value="Ahmedabad">Ahmedabad</option>
-                  <option value="Gandhinagar">Gandhinagar</option>
-                  <option value="GIFT City">GIFT City</option>
-                </select>
-                <svg
-                  className="pointer-events-none absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
+              <CityDropdown city={city} setCity={setCity} />
 
               <div className="mx-2 h-3.5 w-[1px] bg-slate-200/80 shrink-0" />
 
