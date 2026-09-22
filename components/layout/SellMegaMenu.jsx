@@ -1,13 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import EnquireModal from "@/components/property/EnquireModal";
 
 /*
-  Sell is an action, not a category to browse — so unlike Buy/Rent/Investment/
-  Gift City this menu is "how do I start" (category to sell, who I am, deal
-  type) rather than "what can I browse". All links point at /post-property
-  with query params PostPropertyForm can read to pre-fill its dropdowns.
+  Sell is an action, not a category to browse — clicking options opens
+  the quick lead enquiry form modal directly for smooth conversion.
 */
 
 export const SELL_CATEGORY_LINKS = [
@@ -53,22 +53,28 @@ function ColumnHeading({ icon, children }) {
   );
 }
 
-function MenuLink({ item, onClose }) {
+function MenuLink({ item, onSelect }) {
   return (
-    <Link
-      href={item.href}
-      onClick={onClose}
-      className="group flex items-center justify-between text-xs text-slate-600 transition-colors duration-150 hover:text-[#a98440] py-1"
+    <button
+      type="button"
+      onClick={() => onSelect(item)}
+      className="group flex w-full items-center justify-between text-xs text-slate-600 transition-colors duration-150 hover:text-[#a98440] py-1 text-left cursor-pointer"
     >
       <span className="transition-colors duration-150 group-hover:font-medium">
         {item.label}
       </span>
       <ArrowRight className="h-3 w-3 opacity-0 -translate-x-1 text-[#a98440] transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0" />
-    </Link>
+    </button>
   );
 }
 
 export default function SellMegaMenu({ onClose = () => {} }) {
+  const [selectedEnquiry, setSelectedEnquiry] = useState(null);
+
+  const handleSelect = (item) => {
+    setSelectedEnquiry(item);
+  };
+
   return (
     <div className="rounded-2xl border border-slate-100/90 bg-white/98 backdrop-blur-xl p-4 sm:p-5 lg:p-6 shadow-[0_20px_50px_rgba(15,23,42,0.16)] ring-1 ring-black/[0.04] transition-all max-h-[calc(100vh-75px)] overflow-y-auto">
       <div className="grid gap-5 lg:gap-6 lg:grid-cols-[1fr_1fr_1.1fr_320px]">
@@ -77,7 +83,7 @@ export default function SellMegaMenu({ onClose = () => {} }) {
           <ColumnHeading icon="🏠">I want to sell my...</ColumnHeading>
           <div className="mt-2.5 space-y-1.5">
             {SELL_CATEGORY_LINKS.map((item) => (
-              <MenuLink key={item.label} item={item} onClose={onClose} />
+              <MenuLink key={item.label} item={item} onSelect={handleSelect} />
             ))}
           </div>
         </div>
@@ -87,7 +93,7 @@ export default function SellMegaMenu({ onClose = () => {} }) {
           <ColumnHeading icon="👤">I am a...</ColumnHeading>
           <div className="mt-2.5 space-y-1.5">
             {SELL_USER_TYPE_LINKS.map((item) => (
-              <MenuLink key={item.label} item={item} onClose={onClose} />
+              <MenuLink key={item.label} item={item} onSelect={handleSelect} />
             ))}
           </div>
 
@@ -95,7 +101,7 @@ export default function SellMegaMenu({ onClose = () => {} }) {
             <ColumnHeading icon="🤝">Deal Type</ColumnHeading>
             <div className="mt-2 space-y-1.5">
               {SELL_DEAL_TYPE_LINKS.map((item) => (
-                <MenuLink key={item.label} item={item} onClose={onClose} />
+                <MenuLink key={item.label} item={item} onSelect={handleSelect} />
               ))}
             </div>
           </div>
@@ -125,9 +131,9 @@ export default function SellMegaMenu({ onClose = () => {} }) {
         </div>
 
         {/* Featured CTA card */}
-        <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-b from-[#fbf7ee] to-white p-3.5 ring-1 ring-[#e2d1b3]/70 shadow-xs transition-all duration-200 hover:shadow-md">
-          <div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[9.5px] font-bold text-[#a98440]">
+        <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-b from-[#fbf7ee] to-white p-3.5 ring-1 ring-[#e2d1b3]/70 shadow-xs transition-all duration-200 hover:shadow-md h-full">
+          <div className="flex flex-col flex-1 min-h-0">
+            <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[9.5px] font-bold text-[#a98440] w-fit">
               💰 Free Tool
             </span>
 
@@ -138,11 +144,12 @@ export default function SellMegaMenu({ onClose = () => {} }) {
               Find out what your property is really worth — our experts analyze trends for free.
             </p>
 
-            <div className="mt-2.5 overflow-hidden rounded-lg">
+            {/* Expanded Image Filling the Gap */}
+            <div className="my-2.5 flex-1 min-h-[160px] overflow-hidden rounded-lg relative">
               <img
                 src="/images/ninth.png"
                 alt="Property valuation"
-                className="h-20 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           </div>
@@ -150,7 +157,7 @@ export default function SellMegaMenu({ onClose = () => {} }) {
           <Link
             href="/post-property"
             onClick={onClose}
-            className="mt-3 block rounded-md bg-[#a98440] hover:bg-[#977232] py-2 text-center text-xs font-bold text-white shadow-xs transition active:scale-95"
+            className="mt-3 block rounded-md bg-[#a98440] hover:bg-[#977232] py-2 text-center text-xs font-bold text-white shadow-xs transition active:scale-95 shrink-0"
           >
             Post Your Property →
           </Link>
@@ -174,6 +181,17 @@ export default function SellMegaMenu({ onClose = () => {} }) {
           </div>
         ))}
       </div>
+
+      {selectedEnquiry && (
+        <EnquireModal
+          property={{ title: selectedEnquiry.label }}
+          category="sell"
+          onClose={() => {
+            setSelectedEnquiry(null);
+            onClose();
+          }}
+        />
+      )}
     </div>
   );
 }

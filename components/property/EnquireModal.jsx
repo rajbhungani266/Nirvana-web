@@ -1,11 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { submitLead } from "@/lib/api";
 
 export default function EnquireModal({ property, category, onClose }) {
+  const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -27,13 +33,15 @@ export default function EnquireModal({ property, category, onClose }) {
     }
   }
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fadeIn"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl"
+        className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl transition-all"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between">
@@ -86,6 +94,7 @@ export default function EnquireModal({ property, category, onClose }) {
           {status && <p className="text-[12px] text-slate-600">{status}</p>}
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

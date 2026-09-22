@@ -14,7 +14,6 @@ import {
   Users,
   Lock,
   PhoneCall,
-  Sparkles,
   Star,
   FileEdit,
   ArrowRight,
@@ -266,43 +265,25 @@ export default function BuyMegaMenu({ onClose = () => {} }) {
         </div>
 
         {/* Featured Opportunity card */}
-        <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-b from-[#fbf7ee] to-white p-3.5 ring-1 ring-[#e2d1b3]/70 shadow-xs transition-all duration-200 hover:shadow-md">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[9.5px] font-bold text-[#a98440]">
-                <Sparkles className="h-3 w-3" />
-                <span>Featured Opportunity</span>
-              </span>
-            </div>
-
-            <h4 className="mt-2 text-sm font-bold text-slate-900 group-hover:text-[#a98440] transition-colors leading-tight">
+        <div className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-gradient-to-b from-[#fbf7ee] to-white p-3.5 ring-1 ring-[#e2d1b3]/70 shadow-xs transition-all duration-200 hover:shadow-md h-full">
+          <div className="flex flex-col flex-1 min-h-0">
+            <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#a98440] transition-colors leading-tight">
               Premium Office Tower
             </h4>
             <p className="text-[11px] text-slate-500 truncate mt-0.5">
               Iscon Ambli Road, Ahmedabad
             </p>
 
-            <div className="mt-1.5 flex flex-wrap gap-1">
-              <span className="rounded bg-amber-50 px-2 py-0.5 text-[9px] font-semibold text-[#a98440]">
-                Grade A
-              </span>
-              <span className="rounded bg-green-50 px-2 py-0.5 text-[9px] font-semibold text-green-600">
-                Pre-Leased
-              </span>
-              <span className="rounded bg-amber-50 px-2 py-0.5 text-[9px] font-semibold text-amber-600">
-                High ROI
-              </span>
-            </div>
-
-            <div className="mt-2.5 overflow-hidden rounded-lg">
+            {/* Expanded Image Filling the Gap */}
+            <div className="my-2.5 flex-1 min-h-[160px] overflow-hidden rounded-lg relative">
               <img
                 src="/images/ninth.png"
                 alt="Premium Office Tower"
-                className="h-20 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
 
-            <div className="mt-2 grid grid-cols-3 gap-1 text-center">
+            <div className="grid grid-cols-3 gap-1 text-center py-1.5 bg-white/70 rounded-lg border border-amber-100/60">
               <div>
                 <p className="text-[12px] font-bold text-green-600">8.2%*</p>
                 <p className="text-[9px] text-slate-500">Rental Yield</p>
@@ -321,7 +302,7 @@ export default function BuyMegaMenu({ onClose = () => {} }) {
             </div>
           </div>
 
-          <div className="mt-2 border-t border-slate-100 pt-2 flex items-center justify-between">
+          <div className="mt-2.5 border-t border-slate-100 pt-2 flex items-center justify-between shrink-0">
             <div>
               <p className="text-[10px] text-slate-500 leading-none">Starts from</p>
               <p className="text-sm font-bold text-[#a98440]">₹91.52 Lac.</p>
