@@ -85,67 +85,65 @@ export default function HomeSections() {
           </div>
 
           {/* 3 Showcase Items: Wide Image | Middle Card | Right Card */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Left Wide Interior Image */}
-            <div className="md:col-span-6 lg:col-span-6 min-h-[300px] md:min-h-[390px] rounded-2xl overflow-hidden bg-slate-100 shadow-xs relative">
+            <div className="lg:col-span-6 h-[320px] rounded-[24px] overflow-hidden bg-slate-100 shadow-xs relative">
               <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80"
+                src="/images/discover-interior-left.jpg"
                 alt="Modern Living Room Interior"
                 className="h-full w-full object-cover"
-                onError={(e) => { e.target.src = '/images/third.png'; }}
               />
             </div>
 
-            {/* Middle Feature Card */}
-            <div className="md:col-span-3 lg:col-span-3 bg-[#f8f9fa] border border-slate-200/70 rounded-2xl p-6 sm:p-7 flex flex-col justify-between items-center text-center shadow-2xs min-h-[300px]">
-              <div className="my-auto flex flex-col items-center">
-                <h3 className="text-lg sm:text-[19px] font-bold text-slate-900 leading-snug">
-                  Discover Properties<br />That Match Your Goals
-                </h3>
-                <p className="mt-4 text-xs sm:text-[12.5px] leading-relaxed text-slate-500 max-w-[210px]">
-                  Explore curated opportunities across residential, investment, and future growth locations designed for confident decision-making.
-                </p>
+            {/* Right Side: Middle Card + Right Card + Bottom Subtitle */}
+            <div className="lg:col-span-6 flex flex-col justify-between">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                {/* Middle Feature Card */}
+                <div className="h-[320px] bg-[#f6f6f7] border border-slate-200/70 rounded-[20px] p-5 sm:p-6 flex flex-col justify-between items-center text-center shadow-2xs">
+                  <div className="my-auto flex flex-col items-center">
+                    <h3 className="text-[17px] font-bold text-slate-900 leading-snug">
+                      Discover Properties<br />That Match Your Goals
+                    </h3>
+                    <p className="mt-3 text-[12px] leading-relaxed text-slate-500 max-w-[190px]">
+                      Explore curated opportunities across residential, investment, and future growth locations designed for confident decision-making.
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/residential"
+                    className="mt-4 rounded-full bg-white text-slate-800 text-xs font-semibold px-6 py-2.5 shadow-xs border border-slate-200/80 hover:bg-slate-50 transition active:scale-95"
+                  >
+                    Explore Projects
+                  </Link>
+                </div>
+
+                {/* Right Feature Card with Image */}
+                <div className="h-[320px] bg-white border border-slate-200/70 rounded-[20px] overflow-hidden flex flex-col justify-between shadow-2xs">
+                  <div className="h-[155px] w-full overflow-hidden bg-slate-100 shrink-0">
+                    <img
+                      src="/images/discover-interior-right.jpg"
+                      alt="Luxury Living Space"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+
+                  <div className="p-4 flex flex-col items-center justify-between flex-1 text-center">
+                    <h4 className="text-[15px] font-bold text-slate-900 mt-1">
+                      Pricing Start at $256K
+                    </h4>
+
+                    <Link
+                      href="/residential"
+                      className="mt-3 w-full max-w-[170px] rounded-full bg-black text-white text-xs font-semibold py-2.5 px-5 hover:bg-slate-800 transition active:scale-95 shadow-sm text-center"
+                    >
+                      Explore Properties
+                    </Link>
+                  </div>
+                </div>
               </div>
 
-              <Link
-                href="/residential"
-                className="mt-6 rounded-full bg-white text-slate-800 text-xs sm:text-[13px] font-semibold px-6 py-2.5 shadow-xs border border-slate-200 hover:bg-slate-50 transition active:scale-95"
-              >
-                Explore Projects
-              </Link>
-            </div>
-
-            {/* Right Feature Card with Image */}
-            <div className="md:col-span-3 lg:col-span-3 bg-white border border-slate-200/80 rounded-2xl overflow-hidden flex flex-col justify-between shadow-2xs min-h-[300px]">
-              <div className="h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
-                <img
-                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80"
-                  alt="Luxury Living Space"
-                  className="h-full w-full object-cover"
-                  onError={(e) => { e.target.src = '/images/hero-luxury.jpg'; }}
-                />
-              </div>
-
-              <div className="p-5 flex flex-col items-center justify-between flex-1 text-center">
-                <h4 className="text-base sm:text-[17px] font-bold text-slate-900 mt-1">
-                  Pricing Start at $256K
-                </h4>
-
-                <Link
-                  href="/residential"
-                  className="mt-4 w-full max-w-[190px] rounded-full bg-black text-white text-xs sm:text-[13px] font-semibold py-2.5 px-6 hover:bg-slate-800 transition active:scale-95 shadow-sm text-center"
-                >
-                  Explore Properties
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Footnote under Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mt-4">
-            <div className="md:col-span-6 hidden md:block"></div>
-            <div className="md:col-span-6">
-              <p className="text-xs sm:text-[13px] text-slate-500 font-normal leading-relaxed">
+              {/* Bottom Footnote under Middle & Right cards */}
+              <p className="mt-4 text-[13px] text-slate-600 font-normal leading-relaxed max-w-md">
                 Whether it&apos;s creating a cozy corner for relaxation or transforming a small area into a workspace
               </p>
             </div>
