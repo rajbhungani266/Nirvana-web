@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const TESTIMONIAL_SLIDES = [
   [
@@ -111,6 +111,38 @@ const TESTIMONIAL_SLIDES = [
 
 export default function LandingFeatureSections() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  // Auto-play sliding animation every 5.5 seconds (pauses on hover)
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % TESTIMONIAL_SLIDES.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  function handleTouchStart(e) {
+    touchStartX.current = e.targetTouches[0].clientX;
+  }
+
+  function handleTouchMove(e) {
+    touchEndX.current = e.targetTouches[0].clientX;
+  }
+
+  function handleTouchEnd() {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 50) {
+      setActiveSlide((prev) => (prev + 1) % TESTIMONIAL_SLIDES.length);
+    } else if (diff < -50) {
+      setActiveSlide((prev) => (prev - 1 + TESTIMONIAL_SLIDES.length) % TESTIMONIAL_SLIDES.length);
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }
   return (
     <section className="bg-[#f8fafc] text-slate-950">
       {/* 1. Explore Spaces Bento */}
@@ -240,47 +272,69 @@ export default function LandingFeatureSections() {
           </div>
         </div>
 
-        {/* 3 Testimonial Cards */}
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {TESTIMONIAL_SLIDES[activeSlide].map((item, index) => (
-            <div
-              key={index}
-              className="relative flex flex-col justify-between rounded-[24px] border border-slate-200/80 bg-[#f9fafb] p-7 sm:p-8 transition-all duration-300 hover:shadow-md hover:border-slate-300"
-            >
-              {/* Subtle Double Quotation Mark Watermark */}
-              <div className="absolute top-6 right-7 text-4xl sm:text-5xl font-serif text-slate-200/80 select-none pointer-events-none leading-none">
-                “
-              </div>
+        {/* Sliding Testimonials Track with Smooth Transitions */}
+        <div
+          className="mt-12 overflow-hidden w-full"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+            style={{
+              transform: `translateX(-${activeSlide * 100}%)`,
+            }}
+          >
+            {TESTIMONIAL_SLIDES.map((slide, slideIndex) => (
+              <div
+                key={slideIndex}
+                className="w-full shrink-0 min-w-full grid gap-6 md:grid-cols-3 px-0.5 py-1"
+              >
+                {slide.map((item, index) => (
+                  <div
+                    key={index}
+                    className="relative flex flex-col justify-between rounded-[24px] border border-slate-200/80 bg-[#f9fafb] p-7 sm:p-8 transition-all duration-300 hover:shadow-md hover:border-slate-300"
+                  >
+                    {/* Subtle Double Quotation Mark Watermark */}
+                    <div className="absolute top-6 right-7 text-4xl sm:text-5xl font-serif text-slate-200/80 select-none pointer-events-none leading-none">
+                      “
+                    </div>
 
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 pr-8">
-                  {item.title}
-                </h3>
-                <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600">
-                  &ldquo;{item.text}&rdquo;
-                </p>
-                <div className="mt-5 flex text-amber-400 text-sm tracking-wide">
-                  {"★".repeat(item.rating)}
-                </div>
-              </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 pr-8">
+                        {item.title}
+                      </h3>
+                      <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600">
+                        &ldquo;{item.text}&rdquo;
+                      </p>
+                      <div className="mt-5 flex text-amber-400 text-sm tracking-wide">
+                        {"★".repeat(item.rating)}
+                      </div>
+                    </div>
 
-              <div className="mt-6 flex items-center gap-3.5 pt-2">
-                <img
-                  src={item.avatar}
-                  alt={item.author}
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80";
-                  }}
-                  className="h-11 w-11 rounded-full object-cover shadow-xs border border-slate-200 shrink-0"
-                />
-                <div>
-                  <p className="text-sm font-bold text-slate-900">{item.author}</p>
-                  <p className="text-xs text-slate-500">{item.role}</p>
-                </div>
+                    <div className="mt-6 flex items-center gap-3.5 pt-2">
+                      <img
+                        src={item.avatar}
+                        alt={item.author}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src =
+                            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80";
+                        }}
+                        className="h-11 w-11 rounded-full object-cover shadow-xs border border-slate-200 shrink-0"
+                      />
+                      <div>
+                        <p className="text-sm font-bold text-slate-900">{item.author}</p>
+                        <p className="text-xs text-slate-500">{item.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Carousel Pagination Dots matching Image 2 */}
