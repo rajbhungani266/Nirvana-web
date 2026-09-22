@@ -47,7 +47,7 @@ export default function PostPropertyModal({ isOpen, onClose }) {
         setStatus(null);
       }, 2500);
     } catch (err) {
-      console.error("Lead submission error:", err);
+      console.warn("Lead submission issue:", err?.message || err);
       setStatus({
         type: "error",
         message: "Something went wrong. Please try again or reach out to us directly.",
